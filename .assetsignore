@@ -1,0 +1,6 @@
+# Allowlist: only the files the site needs are deployed.
+/*
+!/index.html
+!/css/
+!/js/
+!/img/
