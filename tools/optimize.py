@@ -26,7 +26,6 @@ JOBS = {
     "rivetxp-05-operative-xp-rank.png":("xp-rank",          (480, 960)),
     "rivet-3-logo.jpg":                ("rivet-logo",       (96, 192, 384)),
     "rivetxp-tile.png":                ("xp-tile",          (96, 192)),
-    "scalr-icon-source.png":           ("scalr-icon",       (96, 192, 384)),
 }
 
 

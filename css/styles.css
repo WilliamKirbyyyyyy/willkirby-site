@@ -552,9 +552,6 @@ a:focus-visible, button:focus-visible {
   grid-template-columns: minmax(0, 1fr);
   gap: 20px;
 }
-@media (min-width: 760px) {
-  .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
 
 .card {
   display: flex;
@@ -717,32 +714,24 @@ a:focus-visible, button:focus-visible {
 .card__media--xp .frame { padding: 4px; border-radius: 12px; }
 .card__media--xp .frame img { border-radius: 8px; }
 
-/* labelled placeholder */
-.placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 20px;
-  text-align: center;
-  border: 2px dashed rgba(14,17,22,.22);
-  background:
-    repeating-linear-gradient(-45deg, rgba(14,17,22,.025) 0 10px, transparent 10px 20px),
-    rgba(255,255,255,.4);
+/* full-width secondary card: media left, text right */
+.card__body { display: flex; flex-direction: column; gap: 16px; }
+@media (min-width: 960px) {
+  .card--wide {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+    align-items: center;
+    gap: 40px;
+    padding: clamp(22px, 3.5vw, 36px);
+    border-radius: 28px;
+  }
+  .card--wide .card__media { margin-bottom: 0; }
+  .card--wide .body { font-size: 17px; max-width: 460px; }
 }
-.placeholder__tag {
-  padding: 4px 9px;
-  border-radius: 999px;
-  background: var(--ink);
-  color: #fff;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+@media (hover: hover) {
+  .card--wide:hover { transform: none; }
 }
-.placeholder__title { font-size: 16px; font-weight: 600; }
-.placeholder__hint { max-width: 260px; font-size: 13px; line-height: 1.45; color: var(--ink-3); }
+
 
 /* ---------- Journey ---------- */
 
