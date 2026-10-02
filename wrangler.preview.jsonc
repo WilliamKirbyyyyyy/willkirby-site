@@ -1,0 +1,11 @@
+{
+  // Preview of the v2 multi-page site. No routes: it lives only on workers.dev
+  // and can never take over willkirby.co.uk.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "willkirby-preview",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "assets": {
+    "directory": "."
+  }
+}

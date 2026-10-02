@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-GB" class="no-js">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,11 +12,12 @@
   <meta property="og:title" content="Will Kirby">
   <meta property="og:description" content="Founder of Kirby Systems. Private, local-first software and the hardware it runs next to.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230E1116'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='34' font-weight='700' text-anchor='middle' fill='%23fff'%3EW%3C/text%3E%3C/svg%3E">
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;family=Instrument+Serif:ital@1&amp;display=swap">
-  <link rel="stylesheet" href="css/styles.css">
-  <script src="js/main.js" defer></script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="/js/main.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -37,11 +38,15 @@
         <span class="brand__name">willkirby<span class="brand__tld">.co.uk</span></span>
         <span class="sr-only">Will Kirby, home</span>
       </a>
-      <ul class="nav__links">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#journey">Journey</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a class="nav__cta" href="mailto:will@willkirby.co.uk">Contact</a></li>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <span class="sr-only">Menu</span>
+      </button>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="/rivet/">RIVET</a></li>
+        <li><a href="/investigation/">Investigation</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a class="nav__cta" href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -89,31 +94,31 @@
           <div class="floor" aria-hidden="true"></div>
 
           <figure class="layer layer--back frame glass sheen">
-            <img src="img/rivet-overview-1280.webp"
-                 srcset="img/rivet-overview-640.webp 640w, img/rivet-overview-1280.webp 1280w, img/rivet-overview-1920.webp 1920w"
+            <img src="/img/rivet-overview-1280.webp"
+                 srcset="/img/rivet-overview-640.webp 640w, /img/rivet-overview-1280.webp 1280w, /img/rivet-overview-1920.webp 1920w"
                  sizes="(min-width: 1024px) 460px, 78vw"
                  width="1280" height="720" fetchpriority="high"
                  alt="RIVET 3.5 Overview screen with live CPU, memory, GPU and network readings">
           </figure>
 
           <figure class="layer layer--mid frame glass">
-            <img src="img/rivet-ask-1280.webp"
-                 srcset="img/rivet-ask-640.webp 640w, img/rivet-ask-1280.webp 1280w"
+            <img src="/img/rivet-ask-1280.webp"
+                 srcset="/img/rivet-ask-640.webp 640w, /img/rivet-ask-1280.webp 1280w"
                  sizes="(min-width: 1024px) 360px, 60vw"
                  width="1280" height="720"
                  alt="Ask RIVET, the on-device AI assistant, answering a question about the PC">
           </figure>
 
           <figure class="layer layer--front frame glass">
-            <img src="img/rivet-guard-640.webp"
-                 srcset="img/rivet-guard-640.webp 640w, img/rivet-guard-1280.webp 1280w"
+            <img src="/img/rivet-guard-640.webp"
+                 srcset="/img/rivet-guard-640.webp 640w, /img/rivet-guard-1280.webp 1280w"
                  sizes="(min-width: 1024px) 300px, 50vw"
                  width="640" height="360"
                  alt="RIVET Guard and Restore screen, which watches for Windows updates that change settings">
           </figure>
 
           <div class="layer layer--logo glass">
-            <img src="img/rivet-logo-192.webp" srcset="img/rivet-logo-192.webp 1x, img/rivet-logo-384.webp 2x"
+            <img src="/img/rivet-logo-192.webp" srcset="/img/rivet-logo-192.webp 1x, /img/rivet-logo-384.webp 2x"
                  width="192" height="192" alt="RIVET logo">
           </div>
 
@@ -157,7 +162,7 @@
               <li class="tag tag--live">Live</li><li class="tag">Windows</li><li class="tag">v3.5</li>
             </ul>
             <h3 class="product-title product-title--xl" id="rivet-title">
-              <img class="app-icon" src="img/rivet-logo-96.webp" srcset="img/rivet-logo-96.webp 1x, img/rivet-logo-192.webp 2x" width="48" height="48" alt="">
+              <img class="app-icon" src="/img/rivet-logo-96.webp" srcset="/img/rivet-logo-96.webp 1x, /img/rivet-logo-192.webp 2x" width="48" height="48" alt="">
               RIVET
             </h3>
             <p class="body-lg">A native Windows system manager. Live hardware stats, signed-process verification, startup impact ratings, plain-English tweaks, and Ask RIVET, a local AI that answers questions about your PC without sending anything off it. Version 3.5 adds Guard &amp; Restore, a first-run checkup and roll back to a date.</p>
@@ -171,6 +176,7 @@
                 get-rivet.com
                 <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
               </a>
+              <a class="btn btn--glass btn--sm glass" href="/rivet/">Read the case study</a>
               <a class="btn btn--glass btn--sm glass" href="https://apps.microsoft.com/detail/9nvh0c7jzk0m?cid=willkirby">
                 Microsoft Store
                 <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
@@ -180,29 +186,29 @@
 
           <div class="feature__media">
             <div class="well">
-              <img class="well__art" src="img/rivet-hero-art-960.webp"
-                   srcset="img/rivet-hero-art-960.webp 960w, img/rivet-hero-art-1920.webp 1920w"
+              <img class="well__art" src="/img/rivet-hero-art-960.webp"
+                   srcset="/img/rivet-hero-art-960.webp 960w, /img/rivet-hero-art-1920.webp 1920w"
                    sizes="(min-width: 1024px) 600px, 92vw" width="960" height="540" loading="lazy" alt="">
               <figure class="frame frame--on-dark well__shot">
-                <img src="img/rivet-checkup-1280.webp"
-                     srcset="img/rivet-checkup-640.webp 640w, img/rivet-checkup-1280.webp 1280w, img/rivet-checkup-1920.webp 1920w"
+                <img src="/img/rivet-checkup-1280.webp"
+                     srcset="/img/rivet-checkup-640.webp 640w, /img/rivet-checkup-1280.webp 1280w, /img/rivet-checkup-1920.webp 1920w"
                      sizes="(min-width: 1024px) 480px, 80vw"
                      width="1280" height="720" loading="lazy"
                      alt="RIVET Checkup screen listing what is slowing the PC down, with a fix for each item">
               </figure>
             </div>
             <ul class="thumbs" aria-label="More RIVET 3.5 screenshots">
-              <li><a class="thumb" href="img/rivet-processes-1920.webp">
-                <img src="img/rivet-processes-480.webp" srcset="img/rivet-processes-480.webp 480w, img/rivet-processes-960.webp 960w" sizes="(min-width: 1024px) 140px, 44vw" width="480" height="270" loading="lazy" alt="Processes and Services screen. Open full size.">
+              <li><a class="thumb" href="/img/rivet-processes-1920.webp">
+                <img src="/img/rivet-processes-480.webp" srcset="/img/rivet-processes-480.webp 480w, /img/rivet-processes-960.webp 960w" sizes="(min-width: 1024px) 140px, 44vw" width="480" height="270" loading="lazy" alt="Processes and Services screen. Open full size.">
                 <span class="thumb__label" aria-hidden="true">Processes</span></a></li>
-              <li><a class="thumb" href="img/rivet-history-1920.webp">
-                <img src="img/rivet-history-480.webp" srcset="img/rivet-history-480.webp 480w, img/rivet-history-960.webp 960w" sizes="(min-width: 1024px) 140px, 44vw" width="480" height="270" loading="lazy" alt="History screen with a log of every change and a restore option. Open full size.">
+              <li><a class="thumb" href="/img/rivet-history-1920.webp">
+                <img src="/img/rivet-history-480.webp" srcset="/img/rivet-history-480.webp 480w, /img/rivet-history-960.webp 960w" sizes="(min-width: 1024px) 140px, 44vw" width="480" height="270" loading="lazy" alt="History screen with a log of every change and a restore option. Open full size.">
                 <span class="thumb__label" aria-hidden="true">History</span></a></li>
-              <li><a class="thumb" href="img/rivet-cleanup-1920.webp">
-                <img src="img/rivet-cleanup-480.webp" srcset="img/rivet-cleanup-480.webp 480w, img/rivet-cleanup-960.webp 960w" sizes="(min-width: 1024px) 140px, 44vw" width="480" height="270" loading="lazy" alt="Cleanup screen showing reclaimable space by category. Open full size.">
+              <li><a class="thumb" href="/img/rivet-cleanup-1920.webp">
+                <img src="/img/rivet-cleanup-480.webp" srcset="/img/rivet-cleanup-480.webp 480w, /img/rivet-cleanup-960.webp 960w" sizes="(min-width: 1024px) 140px, 44vw" width="480" height="270" loading="lazy" alt="Cleanup screen showing reclaimable space by category. Open full size.">
                 <span class="thumb__label" aria-hidden="true">Cleanup</span></a></li>
-              <li><a class="thumb" href="img/rivet-tweaks-1920.webp">
-                <img src="img/rivet-tweaks-480.webp" srcset="img/rivet-tweaks-480.webp 480w, img/rivet-tweaks-960.webp 960w" sizes="(min-width: 1024px) 140px, 44vw" width="480" height="270" loading="lazy" alt="Tweaks screen with plain-English Windows settings. Open full size.">
+              <li><a class="thumb" href="/img/rivet-tweaks-1920.webp">
+                <img src="/img/rivet-tweaks-480.webp" srcset="/img/rivet-tweaks-480.webp 480w, /img/rivet-tweaks-960.webp 960w" sizes="(min-width: 1024px) 140px, 44vw" width="480" height="270" loading="lazy" alt="Tweaks screen with plain-English Windows settings. Open full size.">
                 <span class="thumb__label" aria-hidden="true">Tweaks</span></a></li>
             </ul>
           </div>
@@ -227,12 +233,12 @@
         <article class="card card--wide glass" aria-labelledby="xp-title">
           <div class="card__media card__media--xp">
             <figure class="frame glass xp__main">
-              <img src="img/xp-desktop-640.webp" srcset="img/xp-desktop-640.webp 640w, img/xp-desktop-1280.webp 1280w"
+              <img src="/img/xp-desktop-640.webp" srcset="/img/xp-desktop-640.webp 640w, /img/xp-desktop-1280.webp 1280w"
                    sizes="(min-width: 960px) 430px, 76vw" width="640" height="405" loading="lazy"
                    alt="RIVET XP home screen styled like the Windows XP desktop, with rolling green hills">
             </figure>
             <figure class="frame glass xp__rank">
-              <img src="img/xp-rank-480.webp" srcset="img/xp-rank-480.webp 480w, img/xp-rank-960.webp 960w"
+              <img src="/img/xp-rank-480.webp" srcset="/img/xp-rank-480.webp 480w, /img/xp-rank-960.webp 960w"
                    sizes="(min-width: 960px) 300px, 48vw" width="480" height="304" loading="lazy"
                    alt="RIVET XP Operative tab showing rank, daily contracts and achievements">
             </figure>
@@ -240,7 +246,7 @@
           <div class="card__body">
             <ul class="tags" aria-label="Status"><li class="tag tag--live">Live</li><li class="tag">Windows</li></ul>
             <h3 class="product-title" id="xp-title">
-              <img class="app-icon" src="img/xp-tile-96.webp" srcset="img/xp-tile-96.webp 1x, img/xp-tile-192.webp 2x" width="40" height="40" alt="">
+              <img class="app-icon" src="/img/xp-tile-96.webp" srcset="/img/xp-tile-96.webp 1x, /img/xp-tile-192.webp 2x" width="40" height="40" alt="">
               RIVET XP
             </h3>
             <p class="body">A Windows XP-styled task manager with a rank ladder, released as a 25th-anniversary tribute. Its own product, on the Microsoft Store.</p>
@@ -267,16 +273,17 @@
             <li><span class="findings__mark" aria-hidden="true">02</span><span><b>Vape hardware filed under “Power Tools”</b> and <b>sparklers under “Makeup”</b>: categories where an age filter wouldn’t look.</span></li>
             <li><span class="findings__mark" aria-hidden="true">03</span><span><b>Weedkiller under “Pet Food”</b>, rat poison under “Insect Repellers”, syringes under “Kitchen Utensils”.</span></li>
           </ul>
+          <a class="more-link" href="/investigation/">Read the full investigation, with all 12 screenshots</a>
           <p class="report__method">12 dated screenshots · the relevant law mapped for each listing · limits stated plainly: one session, no purchase made, so no claim about checkout.</p>
         </div>
         <div class="report__media">
           <figure class="frame glass phone phone--back">
-            <img src="img/temu-makeup-360.webp" srcset="img/temu-makeup-360.webp 360w, img/temu-makeup-720.webp 720w"
+            <img src="/img/temu-makeup-360.webp" srcset="/img/temu-makeup-360.webp 360w, /img/temu-makeup-720.webp 720w"
                  sizes="(min-width: 960px) 230px, 44vw" width="360" height="632" loading="lazy"
                  alt="Temu listing for mini cake sparklers, ranked in the Makeup category">
           </figure>
           <figure class="frame glass phone phone--front">
-            <img src="img/temu-powertools-360.webp" srcset="img/temu-powertools-360.webp 360w, img/temu-powertools-720.webp 720w"
+            <img src="/img/temu-powertools-360.webp" srcset="/img/temu-powertools-360.webp 360w, /img/temu-powertools-720.webp 720w"
                  sizes="(min-width: 960px) 230px, 44vw" width="360" height="632" loading="lazy"
                  alt="Temu listing for a 510 vape battery pen with USB charger, ranked in the Power Tools category">
           </figure>
@@ -284,73 +291,27 @@
       </article>
     </section>
 
-    <!-- JOURNEY -->
-    <section class="section container" id="journey" aria-labelledby="journey-title">
-      <div class="section__head">
-        <p class="eyebrow">03 — How RIVET grew</p>
-        <h2 class="h2" id="journey-title">A script that kept <em class="serif">growing up.</em></h2>
-      </div>
-      <ol class="timeline glass">
-        <li class="step">
-          <span class="step__ver">1.0</span>
-          <h3 class="step__title">Jarvis</h3>
-          <p class="step__text">A personal productivity tool. Never shipped, but it started everything.</p>
-        </li>
-        <li class="step">
-          <span class="step__ver">2.x</span>
-          <h3 class="step__title">PowerShell</h3>
-          <p class="step__text">Released on itch.io in Free, Lite and Pro tiers. 136 downloads.</p>
-        </li>
-        <li class="step">
-          <span class="step__ver">3.0 – 3.3</span>
-          <h3 class="step__title">Native app</h3>
-          <p class="step__text">.NET 10 + WPF with on-device AI. Live on the Microsoft Store since July 2026.</p>
-        </li>
-        <li class="step step--now glass-soft" aria-current="step">
-          <span class="step__ver step__ver--now">3.5 — Now</span>
-          <h3 class="step__title">Guard &amp; rollback</h3>
-          <p class="step__text">Eleven new features, including a first-run checkup, Guard &amp; Restore and roll back to a date.</p>
-        </li>
-      </ol>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="section container about" id="about" aria-labelledby="about-title">
-      <div class="about__copy">
-        <p class="eyebrow">04 — About</p>
-        <h2 class="h2" id="about-title">Software, hardware, <em class="serif">and the maths underneath.</em></h2>
-        <p class="body-lg">I'm a student and indie developer who has been building and selling software for several years. I'm aiming at computer science, electronics and business, with a growing pull towards quantitative work. I learn by shipping: microcontrollers, CAD and 3D printing sit alongside the code.</p>
-        <p class="body-lg">I'm at Blundell's School, where I'm an Academic Scholar and a DT Scholar.</p>
-        <p class="body-lg">Away from the screen I sing with Cantorum and the Chamber Choir, including a Christmas concert at Exeter Cathedral and a tour that took us to St Stephen's Cathedral (the Stephansdom) in Vienna.</p>
-      </div>
-      <div class="about__side">
-        <div class="panel glass">
-          <h3 class="panel__label">Recognition</h3>
-          <ul class="awards">
-            <li><span>Perse Coding Team Challenge</span><span class="awards__result">Distinction · Best in school</span></li>
-            <li><span>BPhO Physics Challenge</span><span class="awards__result">Gold</span></li>
-            <li><span>UK Bebras, Juniors</span><span class="awards__result">Gold</span></li>
-            <li><span>UKMT Junior Maths Challenge</span><span class="awards__result">Silver</span></li>
-            <li><span>Duke of Edinburgh's Award</span><span class="awards__result">Bronze · Silver in progress</span></li>
-          </ul>
-        </div>
-        <div class="panel glass">
-          <h3 class="panel__label">Leadership &amp; service</h3>
-          <ul class="awards">
-            <li><span>House Captain</span><span class="awards__result">Blundell's</span></li>
-            <li><span>STEM Ambassador</span></li>
-            <li><span>Push-ups through September 2026 for Cancer Research UK</span><span class="awards__result">About £400 raised</span></li>
-          </ul>
-        </div>
-        <div class="panel glass">
-          <h3 class="panel__label">Currently</h3>
+    <!-- ABOUT (teaser) -->
+    <section class="section container" id="about" aria-labelledby="about-title">
+      <div class="split">
+        <div class="prose">
+          <p class="eyebrow">03 — About</p>
+          <h2 class="h2" id="about-title">Software, hardware, <em class="serif">and the maths underneath.</em></h2>
+          <p>I'm a student at Blundell's School, where I'm an Academic Scholar and a DT Scholar, and I've been building and selling software for several years. Away from the screen I sing with Cantorum and the Chamber Choir, I'm a House Captain and a STEM Ambassador, and I raised about £400 for Cancer Research UK this September.</p>
           <ul class="chips">
-            <li class="glass-soft">Preparing for UKOAI 2027</li>
-            <li class="glass-soft">Learning neural networks</li>
-            <li class="glass-soft">High-altitude balloon payload</li>
-            <li class="glass-soft">Reprinting a DIY VR headset</li>
-            <li class="glass-soft">Shipping RIVET 3.5</li>
+            <li class="glass-soft">Perse Coding · Distinction</li>
+            <li class="glass-soft">BPhO · Gold</li>
+            <li class="glass-soft">Bebras · Gold</li>
+            <li class="glass-soft">DofE Bronze</li>
           </ul>
+          <a class="more-link" href="/about/">More about me</a>
+        </div>
+        <div class="split__media">
+          <div class="photo-slot photo-slot--portrait" role="img" aria-label="Photo placeholder: portrait of Will">
+            <p class="photo-slot__tag">Photo needed</p>
+            <p class="photo-slot__title">Portrait of Will</p>
+            <p class="photo-slot__hint">Head and shoulders, window light, plain background.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -359,7 +320,7 @@
     <section class="section container" id="contact" aria-labelledby="contact-title">
       <div class="contact glass">
         <div class="contact__copy">
-          <p class="eyebrow">05 — Contact</p>
+          <p class="eyebrow">04 — Contact</p>
           <h2 class="h2 h2--xl" id="contact-title">Let's build <em class="serif">something.</em></h2>
           <p class="body-lg">Internships, collaborations, questions about RIVET, or anything else.</p>
         </div>
