@@ -26,6 +26,8 @@ JOBS = {
     "rivetxp-05-operative-xp-rank.png":("xp-rank",          (480, 960)),
     "rivet-3-logo.jpg":                ("rivet-logo",       (96, 192, 384)),
     "rivetxp-tile.png":                ("xp-tile",          (96, 192)),
+    "temu-e2-powertools.png":          ("temu-powertools",  (360, 720)),  # evidence E2, status bar cropped
+    "temu-e3-makeup.png":              ("temu-makeup",      (360, 720)),  # evidence E3, status bar cropped
 }
 
 

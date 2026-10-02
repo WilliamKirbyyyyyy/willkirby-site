@@ -77,9 +77,9 @@
         </div>
 
         <ul class="stats" aria-label="At a glance">
-          <li class="stat glass-soft"><span class="stat__num">240</span><span class="stat__label">Store markets</span></li>
+          <li class="stat glass-soft"><span class="stat__num">177</span><span class="stat__label">Downloads &amp; installs</span></li>
           <li class="stat glass-soft"><span class="stat__num">2</span><span class="stat__label">Apps shipped</span></li>
-          <li class="stat glass-soft"><span class="stat__num">18</span><span class="stat__label">Countries with installs</span></li>
+          <li class="stat glass-soft"><span class="stat__num">18</span><span class="stat__label">Countries, both apps</span></li>
         </ul>
       </div>
 
@@ -162,8 +162,8 @@
             </h3>
             <p class="body-lg">A native Windows system manager. Live hardware stats, signed-process verification, startup impact ratings, plain-English tweaks, and Ask RIVET, a local AI that answers questions about your PC without sending anything off it. Version 3.5 adds Guard &amp; Restore, a first-run checkup and roll back to a date.</p>
             <ul class="mini-stats">
-              <li><span class="mini-stats__num">240</span><span class="mini-stats__label">Markets</span></li>
-              <li><span class="mini-stats__num">14</span><span class="mini-stats__label">Countries installed</span></li>
+              <li><span class="mini-stats__num">33</span><span class="mini-stats__label">Store installs</span></li>
+              <li><span class="mini-stats__num">v3.5</span><span class="mini-stats__label">Current version</span></li>
               <li><span class="mini-stats__num">.NET 10</span><span class="mini-stats__label">WPF · MVVM</span></li>
             </ul>
             <div class="actions">
@@ -250,10 +250,44 @@
       </div>
     </section>
 
+    <!-- INVESTIGATION -->
+    <section class="section container" id="investigation" aria-labelledby="investigation-title">
+      <div class="section__head">
+        <p class="eyebrow">02 — Investigation</p>
+        <h2 class="h2" id="investigation-title">What the app <em class="serif">doesn't</em> check.</h2>
+      </div>
+      <article class="card card--report glass">
+        <div class="report__text">
+          <ul class="tags" aria-label="About this report">
+            <li class="tag">Report</li><li class="tag">Feb 2026</li><li class="tag">Trading Standards</li>
+          </ul>
+          <p class="body-lg">In February 2026 I recorded twelve listings on the Temu UK app for products that are age-restricted or banned from sale in the UK. Each could be added to the basket with no age check shown. I wrote it up with the law each listing engages and submitted it to Trading Standards.</p>
+          <ul class="findings">
+            <li><span class="findings__mark" aria-hidden="true">01</span><span><b>Disposable vapes on the homepage</b>, though their sale has been banned UK-wide since June 2025.</span></li>
+            <li><span class="findings__mark" aria-hidden="true">02</span><span><b>Vape hardware filed under “Power Tools”</b> and <b>sparklers under “Makeup”</b>: categories where an age filter wouldn’t look.</span></li>
+            <li><span class="findings__mark" aria-hidden="true">03</span><span><b>Weedkiller under “Pet Food”</b>, rat poison under “Insect Repellers”, syringes under “Kitchen Utensils”.</span></li>
+          </ul>
+          <p class="report__method">12 dated screenshots · the relevant law mapped for each listing · limits stated plainly: one session, no purchase made, so no claim about checkout.</p>
+        </div>
+        <div class="report__media">
+          <figure class="frame glass phone phone--back">
+            <img src="img/temu-makeup-360.webp" srcset="img/temu-makeup-360.webp 360w, img/temu-makeup-720.webp 720w"
+                 sizes="(min-width: 960px) 230px, 44vw" width="360" height="632" loading="lazy"
+                 alt="Temu listing for mini cake sparklers, ranked in the Makeup category">
+          </figure>
+          <figure class="frame glass phone phone--front">
+            <img src="img/temu-powertools-360.webp" srcset="img/temu-powertools-360.webp 360w, img/temu-powertools-720.webp 720w"
+                 sizes="(min-width: 960px) 230px, 44vw" width="360" height="632" loading="lazy"
+                 alt="Temu listing for a 510 vape battery pen with USB charger, ranked in the Power Tools category">
+          </figure>
+        </div>
+      </article>
+    </section>
+
     <!-- JOURNEY -->
     <section class="section container" id="journey" aria-labelledby="journey-title">
       <div class="section__head">
-        <p class="eyebrow">02 — How RIVET grew</p>
+        <p class="eyebrow">03 — How RIVET grew</p>
         <h2 class="h2" id="journey-title">A script that kept <em class="serif">growing up.</em></h2>
       </div>
       <ol class="timeline glass">
@@ -283,9 +317,11 @@
     <!-- ABOUT -->
     <section class="section container about" id="about" aria-labelledby="about-title">
       <div class="about__copy">
-        <p class="eyebrow">03 — About</p>
+        <p class="eyebrow">04 — About</p>
         <h2 class="h2" id="about-title">Software, hardware, <em class="serif">and the maths underneath.</em></h2>
         <p class="body-lg">I'm a student and indie developer who has been building and selling software for several years. I'm aiming at computer science, electronics and business, with a growing pull towards quantitative work. I learn by shipping: microcontrollers, CAD and 3D printing sit alongside the code.</p>
+        <p class="body-lg">I'm at Blundell's School, where I'm an Academic Scholar and a DT Scholar.</p>
+        <p class="body-lg">Away from the screen I sing with Cantorum and the Chamber Choir, including a Christmas concert at Exeter Cathedral and a tour that took us to St Stephen's Cathedral (the Stephansdom) in Vienna.</p>
       </div>
       <div class="about__side">
         <div class="panel glass">
@@ -295,6 +331,15 @@
             <li><span>BPhO Physics Challenge</span><span class="awards__result">Gold</span></li>
             <li><span>UK Bebras, Juniors</span><span class="awards__result">Gold</span></li>
             <li><span>UKMT Junior Maths Challenge</span><span class="awards__result">Silver</span></li>
+            <li><span>Duke of Edinburgh's Award</span><span class="awards__result">Bronze · Silver in progress</span></li>
+          </ul>
+        </div>
+        <div class="panel glass">
+          <h3 class="panel__label">Leadership &amp; service</h3>
+          <ul class="awards">
+            <li><span>House Captain</span><span class="awards__result">Blundell's</span></li>
+            <li><span>STEM Ambassador</span></li>
+            <li><span>Push-ups through September 2026 for Cancer Research UK</span><span class="awards__result">About £400 raised</span></li>
           </ul>
         </div>
         <div class="panel glass">
@@ -303,6 +348,7 @@
             <li class="glass-soft">Preparing for UKOAI 2027</li>
             <li class="glass-soft">Learning neural networks</li>
             <li class="glass-soft">High-altitude balloon payload</li>
+            <li class="glass-soft">Reprinting a DIY VR headset</li>
             <li class="glass-soft">Shipping RIVET 3.5</li>
           </ul>
         </div>
@@ -313,7 +359,7 @@
     <section class="section container" id="contact" aria-labelledby="contact-title">
       <div class="contact glass">
         <div class="contact__copy">
-          <p class="eyebrow">04 — Contact</p>
+          <p class="eyebrow">05 — Contact</p>
           <h2 class="h2 h2--xl" id="contact-title">Let's build <em class="serif">something.</em></h2>
           <p class="body-lg">Internships, collaborations, questions about RIVET, or anything else.</p>
         </div>
