@@ -1049,6 +1049,10 @@ a:focus-visible, button:focus-visible {
     rgba(255,255,255,.45);
 }
 .photo-slot--portrait { aspect-ratio: 4 / 5; }
+.photo { margin: 0; border-radius: 24px; overflow: hidden; box-shadow: 0 18px 40px -24px rgba(14,17,22,.45); }
+.photo img { display: block; width: 100%; height: auto; }
+.photo--portrait { aspect-ratio: 4 / 5; }
+.photo--portrait img { height: 100%; object-fit: cover; }
 .photo-slot--landscape { aspect-ratio: 3 / 2; }
 .photo-slot__tag {
   padding: 4px 9px; border-radius: 999px; background: var(--ink); color: #fff;
