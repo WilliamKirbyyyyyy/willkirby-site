@@ -1053,6 +1053,9 @@ a:focus-visible, button:focus-visible {
 .photo img { display: block; width: 100%; height: auto; }
 .photo--portrait { aspect-ratio: 4 / 5; }
 .photo--portrait img { height: 100%; object-fit: cover; }
+.fundraiser { display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: clamp(24px, 4vw, 40px); }
+.fundraiser__num { margin: 0; font-size: clamp(48px, 8vw, 84px); font-weight: 700; letter-spacing: -.03em; line-height: 1; }
+.fundraiser__text { margin: 0; color: var(--ink-2); }
 .photo-slot--landscape { aspect-ratio: 3 / 2; }
 .photo-slot__tag {
   padding: 4px 9px; border-radius: 999px; background: var(--ink); color: #fff;
