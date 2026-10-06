@@ -1,2 +1,3 @@
 .assetsignore text eol=lf
 wrangler.jsonc text eol=lf
+wrangler.preview.jsonc text eol=lf

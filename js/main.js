@@ -48,3 +48,24 @@
     scene.style.removeProperty('--ry');
   });
 })();
+
+// Phone menu: a disclosure button that shows the nav links on small screens.
+(() => {
+  const toggle = document.querySelector('.nav__toggle');
+  const links = document.getElementById('nav-links');
+  if (!toggle || !links) return;
+
+  const setOpen = (open) => {
+    toggle.setAttribute('aria-expanded', String(open));
+    links.classList.toggle('is-open', open);
+  };
+
+  toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  links.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { setOpen(false); toggle.focus(); }
+  });
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav')) setOpen(false);
+  });
+})();
