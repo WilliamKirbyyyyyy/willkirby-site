@@ -291,6 +291,25 @@
     });
   }
 
+  // About: the headset build sheet swaps to the render for whichever part is in view.
+  const build = $('[data-build]');
+  if (build) {
+    const frames = build.querySelectorAll('.build__frames img');
+    const parts = build.querySelectorAll('.build__parts li');
+    const now = build.querySelector('[data-build-now]');
+    const show = (step) => {
+      frames.forEach((f) => f.classList.toggle('is-on', f.dataset.step === step));
+      parts.forEach((p) => p.classList.toggle('is-on', p.dataset.step === step));
+      const label = step.padStart(2, '0');
+      if (now.textContent !== label) { now.textContent = label; scramble(now, 0.3); }
+    };
+    show('1');
+    parts.forEach((li) => ScrollTrigger.create({
+      trigger: li, start: 'top 65%', end: 'bottom 65%',
+      onToggle: (self) => { if (self.isActive) show(li.dataset.step); },
+    }));
+  }
+
   // Figures drift a little inside their frames.
   gsap.utils.toArray('[data-parallax]').forEach((img) => {
     gsap.fromTo(img, { yPercent: -7, scale: 1.18 }, {

@@ -643,6 +643,44 @@ body.page--case { background: var(--case); }
 .currently__list { display: flex; flex-wrap: wrap; gap: 8px; }
 .currently__list li { padding: 8px 12px; border: 1px solid var(--ink); background: var(--paper); font-size: 14px; }
 
+/* About: the headset build sheet. The stage sticks while the parts list scrolls past it,
+   and each part swaps in the render with that layer added. */
+.build {
+  display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 0 clamp(24px, 4vw, 64px);
+  padding: clamp(64px, 11vh, 128px) var(--gutter) 0;
+}
+.build__head { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; gap: 10px; margin-bottom: clamp(28px, 4vh, 44px); }
+.build__head .block__label { padding-top: 0; }
+.build__stage {
+  grid-column: 2; grid-row: 1 / span 2; align-self: start;
+  position: sticky; top: calc(var(--nav-h) + 24px);
+  border: 1px solid var(--ink); background: var(--paper); box-shadow: 12px 12px 0 var(--ink);
+}
+.build__bar {
+  display: flex; justify-content: space-between; gap: 12px;
+  padding: 8px 12px; font-size: 12px; color: var(--ink-2); text-transform: uppercase;
+}
+.build__bar:first-child { border-bottom: 1px solid var(--line); }
+.build__bar:last-child { border-top: 1px solid var(--line); }
+[data-build-now] { color: var(--accent); }
+.build__frames { display: grid; }
+.build__frames img {
+  grid-area: 1 / 1; width: 100%; aspect-ratio: 4 / 3; opacity: 0;
+  transition: opacity 0s .45s; /* the outgoing frame waits under the incoming one */
+}
+.build__frames img.is-on { opacity: 1; z-index: 1; transition: opacity .45s ease; }
+.build__parts { grid-column: 1; grid-row: 2; border-top: 1px solid var(--ink); }
+.build__parts li {
+  display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 6px 12px; align-content: start;
+  padding: 18px 0 22px; border-bottom: 1px solid var(--line);
+}
+.build__parts b { font-size: clamp(20px, 1.8vw, 28px); font-weight: 600; line-height: 1.05; letter-spacing: -.03em; text-transform: uppercase; }
+.build__parts p { grid-column: 2; color: var(--ink-2); max-width: 44ch; }
+.build__num { color: var(--accent); font-size: 12px; padding-top: .5em; }
+html.anim .build__parts li { min-height: 46vh; transition: opacity .35s ease; opacity: .32; }
+html.anim .build__parts li.is-on { opacity: 1; }
+html.anim .build__parts li:last-child { min-height: 70vh; }
+
 @media (max-width: 960px) {
   .block__head, .hstrip__head, .ms, .currently { grid-template-columns: minmax(0, 1fr); gap: 10px; }
   .block__head > :not(.block__label), .hstrip__head > :not(.block__label) { grid-column: 1; }
@@ -658,6 +696,11 @@ body.page--case { background: var(--case); }
   .cell--raise { grid-column: 1 / -1; }
   .awards--five { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .awards--five li:last-child { grid-column: 1 / -1; }
+  /* Phones: one column, the stage sticks under the nav and the parts scroll beneath it. */
+  .build { display: block; }
+  .build__stage { top: calc(var(--nav-h) + 8px); z-index: 2; box-shadow: 6px 6px 0 var(--ink); margin-bottom: 28px; }
+  html.anim .build__parts li { min-height: 34vh; }
+  html.anim .build__parts li:last-child { min-height: 52vh; }
 }
 @media (max-width: 600px) {
   .cells.cells--three { grid-template-columns: minmax(0, 1fr); }
