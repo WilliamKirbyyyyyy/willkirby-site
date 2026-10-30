@@ -2,25 +2,31 @@
 
 My personal site. Plain HTML, CSS and JavaScript: no framework, no build step, no trackers.
 
-<img src="docs/preview.webp" alt="The site's hero: 'Will Kirby.' on a bright frosted-glass background beside a tilted stack of RIVET screenshots" width="820">
+## What's in it (v3, live since 30 October 2026)
 
-## What's in it
+The site is styled as a set of drawing sheets:
 
-- **Bright liquid glass:** frosted white panels over slow peach and pale-blue light blooms
-- **3D hero:** real RIVET 3.5 screenshots in glass frames that tilt towards the mouse. The tilt is off for touch screens and `prefers-reduced-motion`.
-- **Accessible:** every text colour is contrast-checked to 4.5:1, there's a skip link, real links and buttons, and alt text on every screenshot. Lighthouse accessibility, best practices and SEO all score 100.
-- **Light:** WebP images with `srcset`, about 0.9 MB for the whole image set. LCP is around 0.8 s on a throttled phone.
+- **Home:** a line drawing of RIVET's window draws itself, then a scan line reveals the real app and hands over to a short clip of Spark answering a question. Then come a word-fill statement, sticky chapter covers for RIVET, the investigation and About, and the contact rows.
+- **/rivet/:** the case study, with design directions in a pinned sideways strip, milestones with a sticky counter, and screenshots.
+- **/investigation/:** the Temu report to Trading Standards, as a case file with an evidence wall and a law table.
+- **/about/:** profile, music, leadership, a VR headset build sheet whose exploded renders change as you scroll, and awards.
+
+Motion is progressive. Without JavaScript, or with `prefers-reduced-motion`, every page is already complete, because the hidden start states only apply under `html.anim`.
 
 ## Structure
 
 ```
-index.html
-css/styles.css
-js/main.js         hero tilt (the only script)
-img/               web-ready WebP images, generated
-images/            original screenshots, untouched
-tools/optimize.py  rebuilds img/ from images/
+index.html, rivet/, investigation/, about/   the four pages
+css/v3.css        all styles
+js/v3.js          all motion: GSAP + ScrollTrigger (cdnjs) and Lenis (unpkg)
+img/              web-ready WebP images
+media/            the hero clip (rivet-spark-1600.mp4 and -960.mp4)
+images/           original screenshots, untouched (not deployed)
+tools/optimize.py rebuilds img/ from images/
+css/styles.css, js/main.js   the old v2 styles; no page uses them now
 ```
+
+The hero clip is fetched whole and played from a blob URL. Workers static assets don't answer byte-range requests, and Safari needs them to stream video.
 
 ## Run locally
 
@@ -28,7 +34,23 @@ tools/optimize.py  rebuilds img/ from images/
 python -m http.server 8137
 ```
 
-Then open http://localhost:8137.
+Then open http://localhost:8137. Browsers cache hard, so add `?v=N` to the URL after editing CSS or JS.
+
+## Deploy
+
+The site is a Cloudflare Worker with static assets. `.assetsignore` is an allowlist: a new top-level folder only deploys once it is added there.
+
+Preview (workers.dev only, can't touch the domain):
+
+```bash
+npx -y wrangler@4 deploy -c wrangler.preview.jsonc
+```
+
+Live (willkirby.co.uk and www), from `master`:
+
+```bash
+npx -y wrangler@4 deploy
+```
 
 ## Images
 
@@ -38,4 +60,6 @@ Put originals in `images/`, add them to the `JOBS` list in `tools/optimize.py`, 
 python tools/optimize.py
 ```
 
-Fonts: Geist, Geist Mono and Instrument Serif from Google Fonts.
+Strip GPS data from photos, and never publish an IP address in a screenshot.
+
+Fonts: Geist and Geist Mono from Google Fonts.
