@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>About · Will Kirby</title>
   <meta name="description" content="Student and indie developer at Blundell's School, Academic and DT Scholar, founder of Kirby Systems.">
-  <meta name="theme-color" content="#F6F7FA">
+  <meta name="theme-color" content="#EFEDE6">
   <meta name="color-scheme" content="light">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://willkirby.co.uk/about/">
@@ -13,137 +13,162 @@
   <meta property="og:description" content="Student and indie developer at Blundell's School, Academic and DT Scholar, founder of Kirby Systems.">
   <link rel="canonical" href="https://willkirby.co.uk/about/">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230E1116'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='34' font-weight='700' text-anchor='middle' fill='%23fff'%3EW%3C/text%3E%3C/svg%3E">
-  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+  <script>
+    // Motion is opt-in: hidden start states only apply once this class is set.
+    (function (d) {
+      var c = d.documentElement.classList;
+      c.replace('no-js', 'js');
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        c.add('anim');
+        setTimeout(function () { if (!window.__wkReady) c.remove('anim'); }, 4000);
+      }
+    })(document);
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;family=Instrument+Serif:ital@1&amp;display=swap">
-  <link rel="stylesheet" href="/css/styles.css">
-  <script src="/js/main.js" defer></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+  <link rel="stylesheet" href="/css/v3.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script src="/js/v3.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <div class="ambient" aria-hidden="true">
-    <span class="bloom bloom--peach"></span>
-    <span class="bloom bloom--blue"></span>
-    <span class="bloom bloom--sky"></span>
-    <span class="bloom bloom--peach-low"></span>
-  </div>
 
-  <header class="nav-wrap">
-    <nav class="nav glass" aria-label="Main">
-      <a class="brand" href="/">
-        <span class="brand__mark" aria-hidden="true">W</span>
-        <span class="brand__name">willkirby<span class="brand__tld">.co.uk</span></span>
-        <span class="sr-only">Will Kirby, home</span>
-      </a>
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links">
-        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-        <span class="sr-only">Menu</span>
-      </button>
-      <ul class="nav__links" id="nav-links">
-        <li><a href="/rivet/">RIVET</a></li>
-        <li><a href="/investigation/">Investigation</a></li>
-        <li><a href="/about/" aria-current="page">About</a></li>
-        <li><a class="nav__cta" href="/#contact">Contact</a></li>
-      </ul>
-    </nav>
+  <header class="nav">
+    <a class="nav__brand" href="/">
+      <span class="nav__mark" aria-hidden="true">W</span>
+      <span>Will Kirby</span>
+    </a>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+      <span class="nav__toggle-line" aria-hidden="true"></span>
+      <span class="sr-only">Menu</span>
+    </button>
+    <ul class="nav__links" id="nav-links">
+      <li><a href="/rivet/"><span class="nav__num">01</span>RIVET</a></li>
+      <li><a href="/investigation/"><span class="nav__num">02</span>Investigation</a></li>
+      <li><a href="/about/" aria-current="page"><span class="nav__num">03</span>About</a></li>
+      <li><a class="nav__cta" href="/#contact">Contact</a></li>
+    </ul>
   </header>
 
   <main id="main">
-    <section class="container section split" style="padding-top:clamp(48px,8vw,96px)" aria-labelledby="page-title">
-      <div class="prose">
-        <p class="crumbs">About</p>
-        <h1 class="page-hero__title" id="page-title">Hi, I’m <em class="serif">Will.</em></h1>
-        <p>I’m a student and indie developer, and the founder of <b>Kirby Systems</b>. I’ve been building software for years, and RIVET is the first thing I’ve shipped properly: it started as a PowerShell script and is now a native Windows app on the Microsoft Store.</p>
-        <p>I’m at <b>Blundell’s School</b>, where I’m an <b>Academic Scholar</b> and a <b>DT Scholar</b>. I’m aiming at <b>machine learning and business</b>. I’m learning ML in public through <a href="https://get-rivet.com/epoch/"><b>EPOCH</b></a>, a daily video series that runs until RIVET hits 1,000 downloads, and I’m preparing for the <b>UK Olympiad in AI</b>.</p>
-        <p>I learn by shipping. Alongside the code there are microcontrollers, CAD and 3D printing.</p>
-      </div>
-      <div class="split__media split__media--lead">
-        <figure class="photo photo--square">
-          <img src="/img/will-photo-400.webp" width="400" height="400" loading="lazy" decoding="async" alt="Will Kirby, outdoors in front of a tree and a field fence">
-        </figure>
-      </div>
-    </section>
-
-    <section class="section container split" aria-labelledby="music-title">
-      <div class="split__media">
-        <figure class="photo">
-          <img src="/img/music-stephansdom-640.webp" srcset="/img/music-stephansdom-640.webp 640w, /img/music-stephansdom-905.webp 905w" sizes="(min-width: 1024px) 560px, 92vw" width="640" height="426" loading="lazy" decoding="async" alt="The choir in black, lined up in front of the high altar of St Stephen’s Cathedral in Vienna">
-        </figure>
-      </div>
-      <div class="prose">
-        <p class="eyebrow">Music</p>
-        <h2 class="h2" id="music-title">Away from <em class="serif">the screen.</em></h2>
-        <p>I sing in four choirs at Blundell’s: the <b>Full Choir</b>, <b>Chamber Choir</b>, <b>Boys’ Close Harmony</b> and <b>Cantorum</b>. I also play in the <b>Senior Orchestra</b> and the <b>Junior Instrumental Ensemble</b>.</p>
-        <p>Highlights so far: concerts at <b>Exeter Cathedral</b> and <b>Bath Abbey</b>, a tour to Vienna singing at <b>St Stephen’s Cathedral</b> (the Stephansdom) and <b>St Peter’s Church</b> (the Peterskirche), and this term’s Halloween concert, with the Lacrimosa and the Dies Irae.</p>
-        <p>Grades so far: <b>ABRSM Grade 3 Flute with Merit</b> and <b>Trinity Grade 3 Classical Guitar</b>. I was awarded a year of funded singing lessons and I’m working towards Grade 5 Singing, plus Grade 4 on flute and guitar.</p>
-      </div>
-    </section>
-
-    <section class="section container split" aria-labelledby="service-title">
-      <div class="prose">
-        <p class="eyebrow">Leadership &amp; service</p>
-        <h2 class="h2" id="service-title">Showing up <em class="serif">for others.</em></h2>
-        <ul class="awards panel glass">
-          <li><span>School Council house representative</span><span class="awards__result">Two houses</span></li>
-          <li><span>Senior interhouse debating competition</span><span class="awards__result">Competed</span></li>
-          <li><span>House Captain and STEM Ambassador</span><span class="awards__result">Year 8</span></li>
-          <li><span>Push-ups through September 2026 for Cancer Research UK</span><span class="awards__result">£450 raised</span></li>
-          <li><span>This November: <a href="https://uk.movember.com/mospace/15556991">50 pull-ups a day for Movember</a></span><span class="awards__result">DofE Silver</span></li>
-          <li><span>Next: <a href="https://www.justgiving.com/page/will-kirby-january">200 calf raises a day in January for Steps</a></span><span class="awards__result">DofE Silver</span></li>
-        </ul>
-      </div>
-      <div class="split__media">
-        <div class="panel glass fundraiser">
-          <p class="fundraiser__num">£450</p>
-          <p class="fundraiser__text">raised for Cancer Research UK, plus £107.50 Gift Aid. 450% of the £100 target, doing 100 push-ups a day through September 2026. It’s one exercise a day for a different charity each month, as the volunteering section of my DofE Silver.</p>
+    <section class="chapter chapter--about chapter--page" aria-labelledby="page-title">
+      <div class="cover cover--about">
+        <img class="about__photo" src="/img/will-tree-1280.webp"
+             srcset="/img/will-tree-640.webp 640w, /img/will-tree-1280.webp 1280w, /img/will-tree-1920.webp 1920w"
+             sizes="100vw" width="1280" height="853" fetchpriority="high"
+             alt="Will Kirby outdoors under a tree, with a field fence and blue sky behind">
+        <div class="cover__inner">
+          <div class="cover__top">
+            <span class="cover__num" data-intro="left">03</span>
+            <span class="cover__name cover__name--sm" aria-hidden="true" data-intro="right">About</span>
+          </div>
+          <div class="cover__bottom cover__bottom--about">
+            <h1 class="about__title" id="page-title" data-intro="up">Hi, I’m Will.</h1>
+            <p class="cover__meta mono" data-intro="fade">Sheet 04 / 04 · Fig. 1 — W. Kirby</p>
+          </div>
         </div>
       </div>
+
+      <div class="chapter__body grid-paper">
+        <div class="about">
+          <p class="mono">[04.1] Profile</p>
+          <div class="about__text prose">
+            <p class="body-lg" data-reveal>I’m a student and indie developer, and the founder of <b>Kirby Systems</b>. I’ve been building software for years, and RIVET is the first thing I’ve shipped properly: it started as a PowerShell script and is now a native Windows app on the Microsoft Store.</p>
+            <p data-reveal>I’m at <b>Blundell’s School</b>, where I’m an <b>Academic Scholar</b> and a <b>DT Scholar</b>. I’m aiming at <b>machine learning and business</b>. I’m learning ML in public through <a href="https://get-rivet.com/epoch/"><b>EPOCH</b></a>, a daily video series that runs until RIVET hits 1,000 downloads, and I’m preparing for the <b>UK Olympiad in AI</b>.</p>
+            <p data-reveal>I learn by shipping. Alongside the code there are microcontrollers, CAD and 3D printing.</p>
+          </div>
+        </div>
+
+        <section class="feature" aria-labelledby="music-title">
+          <figure class="feature__media">
+            <div class="feature__frame"><img data-parallax src="/img/music-stephansdom-905.webp" srcset="/img/music-stephansdom-640.webp 640w, /img/music-stephansdom-905.webp 905w" sizes="(min-width: 961px) 50vw, 92vw" width="905" height="603" loading="lazy" decoding="async" alt="The choir in black, lined up in front of the high altar of St Stephen’s Cathedral in Vienna"></div>
+            <figcaption class="mono">Fig. 2 — Vienna tour</figcaption>
+          </figure>
+          <div class="feature__text prose">
+            <p class="mono feature__label">[04.2] Music</p>
+            <h2 class="block__title" id="music-title" data-scramble>Away from the screen.</h2>
+            <p>I sing in four choirs at Blundell’s: the <b>Full Choir</b>, <b>Chamber Choir</b>, <b>Boys’ Close Harmony</b> and <b>Cantorum</b>. I also play in the <b>Senior Orchestra</b> and the <b>Junior Instrumental Ensemble</b>.</p>
+            <p>Highlights so far: concerts at <b>Exeter Cathedral</b> and <b>Bath Abbey</b>, a tour to Vienna singing at <b>St Stephen’s Cathedral</b> (the Stephansdom) and <b>St Peter’s Church</b> (the Peterskirche), and this term’s Halloween concert, with the Lacrimosa and the Dies Irae.</p>
+            <p>Grades so far: <b>ABRSM Grade 3 Flute with Merit</b> and <b>Trinity Grade 3 Classical Guitar</b>. I was awarded a year of funded singing lessons and I’m working towards Grade 5 Singing, plus Grade 4 on flute and guitar.</p>
+          </div>
+        </section>
+
+        <section class="block block--flush" aria-labelledby="service-title">
+          <div class="block__head">
+            <p class="mono block__label">[04.3] Leadership &amp; service</p>
+            <h2 class="block__title" id="service-title" data-scramble>Showing up for others.</h2>
+          </div>
+          <div class="cells">
+            <div class="cell cell--raise">
+              <p class="mono">Cancer Research UK · September 2026</p>
+              <p class="raise__num">£<span data-count-to="450">450</span></p>
+              <p class="raise__text">raised for Cancer Research UK, plus £107.50 Gift Aid. 450% of the £100 target, doing 100 push-ups a day through September 2026. It’s one exercise a day for a different charity each month, as the volunteering section of my DofE Silver.</p>
+            </div>
+            <ul class="cell cell--span3 roles">
+              <li data-reveal><span>School Council house representative</span><span class="mono">Two houses</span></li>
+              <li data-reveal><span>Senior interhouse debating competition</span><span class="mono">Competed</span></li>
+              <li data-reveal><span>House Captain and STEM Ambassador</span><span class="mono">Year 8</span></li>
+              <li data-reveal><span>Push-ups through September 2026 for Cancer Research UK</span><span class="mono">£450 raised</span></li>
+              <li data-reveal><span>This November: <a href="https://uk.movember.com/mospace/15556991">50 pull-ups a day for Movember</a></span><span class="mono">DofE Silver</span></li>
+              <li data-reveal><span>Next: <a href="https://www.justgiving.com/page/will-kirby-january">200 calf raises a day in January for Steps</a></span><span class="mono">DofE Silver</span></li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="feature feature--flip" aria-labelledby="making-title">
+          <figure class="feature__media">
+            <div class="feature__frame"><img data-parallax src="/img/making-vr-1280.webp" srcset="/img/making-vr-640.webp 640w, /img/making-vr-1280.webp 1280w" sizes="(min-width: 961px) 50vw, 92vw" width="1280" height="853" loading="lazy" decoding="async" alt="A DIY VR headset display held up beside a laptop, showing the same SteamVR scene split into two lens-corrected views"></div>
+            <figcaption class="mono">Fig. 3 — DIY VR headset, display test</figcaption>
+          </figure>
+          <div class="feature__text prose">
+            <p class="mono feature__label">[04.4] Making</p>
+            <h2 class="block__title" id="making-title" data-scramble>Hardware, too.</h2>
+            <p>I design parts in CAD and print them, and build with microcontrollers like the ESP32 and RP2040. Right now I’m <b>reprinting a DIY VR headset</b>, designing a <b>Voronoi watch</b> for GCSE 3D Design, and planning a <b>free-flight high-altitude balloon</b> to around 29 km for a CREST Silver Award.</p>
+          </div>
+        </section>
+
+        <section class="block block--flush" aria-labelledby="record-title">
+          <div class="block__head">
+            <p class="mono block__label">[04.5] Recognition</p>
+            <h2 class="block__title" id="record-title" data-scramble>On the record.</h2>
+          </div>
+          <ul class="awards awards--five">
+            <li data-reveal><span class="mono">Perse Coding Team Challenge</span><b>Distinction</b><span class="mono">Best in school</span></li>
+            <li data-reveal><span class="mono">BPhO Physics Challenge</span><b>Gold</b></li>
+            <li data-reveal><span class="mono">UK Bebras, Juniors</span><b>Gold</b></li>
+            <li data-reveal><span class="mono">UKMT Junior Maths Challenge</span><b>Silver</b></li>
+            <li data-reveal><span class="mono">Duke of Edinburgh’s Award</span><b>Bronze</b><span class="mono">Silver in progress</span></li>
+          </ul>
+          <div class="currently">
+            <p class="mono currently__label">Currently</p>
+            <ul class="currently__list">
+              <li>RIVET 3.7, live on the Store</li>
+              <li>EPOCH: learning ML daily</li>
+              <li>Think Essay Prize: AI ethics</li>
+              <li>CREST Silver balloon flight</li>
+              <li>Entered for BIO, BPhO &amp; UKOAI</li>
+              <li>Reprinting a DIY VR headset</li>
+            </ul>
+          </div>
+        </section>
+      </div>
     </section>
 
-    <section class="section container split" aria-labelledby="making-title">
-      <div class="split__media">
-        <figure class="photo">
-          <img src="/img/making-vr-640.webp" srcset="/img/making-vr-640.webp 640w, /img/making-vr-1280.webp 1280w" sizes="(min-width: 1024px) 560px, 92vw" width="640" height="427" loading="lazy" decoding="async" alt="A DIY VR headset display held up beside a laptop, showing the same SteamVR scene split into two lens-corrected views">
-        </figure>
-      </div>
-      <div class="prose">
-        <p class="eyebrow">Making</p>
-        <h2 class="h2" id="making-title">Hardware, <em class="serif">too.</em></h2>
-        <p>I design parts in CAD and print them, and build with microcontrollers like the ESP32 and RP2040. Right now I’m <b>reprinting a DIY VR headset</b>, designing a <b>Voronoi watch</b> for GCSE 3D Design, and planning a <b>free-flight high-altitude balloon</b> to around 29 km for a CREST Silver Award.</p>
-      </div>
-    </section>
-
-    <section class="section container about" aria-labelledby="record-title">
-      <h2 class="sr-only" id="record-title">Recognition and current projects</h2>
-      <div class="panel glass">
-        <h3 class="panel__label">Recognition</h3>
-        <ul class="awards">
-          <li><span>Perse Coding Team Challenge</span><span class="awards__result">Distinction · Best in school</span></li>
-          <li><span>BPhO Physics Challenge</span><span class="awards__result">Gold</span></li>
-          <li><span>UK Bebras, Juniors</span><span class="awards__result">Gold</span></li>
-          <li><span>UKMT Junior Maths Challenge</span><span class="awards__result">Silver</span></li>
-          <li><span>Duke of Edinburgh’s Award</span><span class="awards__result">Bronze · Silver in progress</span></li>
-        </ul>
-      </div>
-      <div class="panel glass">
-        <h3 class="panel__label">Currently</h3>
-        <ul class="chips">
-          <li class="glass-soft">RIVET 3.7, live on the Store</li>
-          <li class="glass-soft">EPOCH: learning ML daily</li>
-          <li class="glass-soft">Think Essay Prize: AI ethics</li>
-          <li class="glass-soft">CREST Silver balloon flight</li>
-          <li class="glass-soft">Entered for BIO, BPhO &amp; UKOAI</li>
-          <li class="glass-soft">Reprinting a DIY VR headset</li>
-        </ul>
-        <a class="more-link" href="/#contact">Get in touch</a>
-      </div>
-    </section>
+    <a class="next" href="/#contact" data-nav-dark>
+      <span class="next__label mono">Back to sheet 01 — Get in touch</span>
+      <span class="next__title" data-next-word>Contact <span aria-hidden="true">→</span></span>
+    </a>
   </main>
 
-  <footer class="footer container">
-    <p>© 2026 Will Kirby · Kirby Systems</p>
-    <p>Built to run fast. No trackers.</p>
+  <footer class="footer" data-nav-dark>
+    <p class="footer__word" aria-hidden="true">Will Kirby</p>
+    <div class="footer__row mono">
+      <p>© 2026 Will Kirby · Kirby Systems</p>
+      <p>Built to run fast. No trackers.</p>
+    </div>
   </footer>
 </body>
 </html>

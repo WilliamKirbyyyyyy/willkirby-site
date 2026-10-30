@@ -1,8 +1,9 @@
-// willkirby.co.uk v3 motion.
+// willkirby.co.uk v3 motion, shared by the homepage and the three inner sheets.
 // Everything here is progressive: without it (or under reduced motion) the
 // page is already complete, because hidden start states only apply under html.anim.
 (() => {
   const root = document.documentElement;
+  const $ = (s) => document.querySelector(s);
 
   // UK clock for the sheet bar and the case-file HUD.
   const clocks = document.querySelectorAll('[data-clock]');
@@ -16,7 +17,7 @@
   }
 
   // Phone menu.
-  const toggle = document.querySelector('.nav__toggle');
+  const toggle = $('.nav__toggle');
   const links = document.getElementById('nav-links');
   if (toggle && links) {
     const setOpen = (open) => {
@@ -91,14 +92,13 @@
   const mm = gsap.matchMedia();
   const desktop = '(min-width: 961px) and (min-height: 600px)';
 
-  // ---------- Hero ----------
-  const drawing = document.querySelector('.drawing');
-  const scan = document.querySelector('.drawing__scan');
+  // ---------- Pins first, so every trigger after them includes their spacing ----------
+  const drawing = $('.drawing');
+  const scan = $('.drawing__scan');
   const markers = gsap.utils.toArray('.marker');
   const notes = gsap.utils.toArray('[data-note]');
-  gsap.set(markers, { xPercent: -50, yPercent: -50, scale: 0 });
 
-  // The scan reveals the screenshot top to bottom; each marker pops as the scan passes it.
+  // Homepage hero: the scan reveals the screenshot top to bottom; each marker pops as the scan passes it.
   const buildReveal = (tl) => {
     tl.set(scan, { opacity: 1 })
       .fromTo(drawing, { '--reveal': '0%' }, { '--reveal': '100%', duration: 1, ease: 'none' }, 0);
@@ -111,6 +111,45 @@
     return tl;
   };
 
+  if (drawing) {
+    gsap.set(markers, { xPercent: -50, yPercent: -50, scale: 0 });
+    // Desktop: the hero pins and scrolling drives the scan. Phones: it plays once the drawing is in view.
+    mm.add(desktop, () => {
+      buildReveal(gsap.timeline({
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: '+=140%', pin: true, scrub: 0.6 },
+      }));
+      return () => notes.forEach((n) => n.classList.remove('is-on'));
+    });
+    mm.add('(max-width: 960px), (max-height: 599px)', () => {
+      buildReveal(gsap.timeline({
+        delay: 0.4,
+        scrollTrigger: { trigger: '.drawing', start: 'top 80%', once: true },
+      })).timeScale(0.55);
+    });
+  }
+
+  // RIVET sheet: the design directions pin and slide sideways on desktop.
+  // Phones (and no-motion) keep a native swipeable strip.
+  const strip = $('[data-hstrip]');
+  if (strip) {
+    const track = strip.querySelector('[data-hstrip-track]');
+    const bar = strip.querySelector('[data-hstrip-bar]');
+    mm.add(desktop, () => {
+      strip.classList.add('is-pinned');
+      const distance = () => Math.max(0, track.scrollWidth - track.clientWidth);
+      gsap.to(track, {
+        x: () => -distance(), ease: 'none',
+        scrollTrigger: {
+          trigger: strip, start: 'top top', end: () => `+=${distance()}`,
+          pin: true, scrub: 0.6, invalidateOnRefresh: true,
+          onUpdate: (self) => { if (bar) bar.style.transform = `scaleX(${self.progress})`; },
+        },
+      });
+      return () => strip.classList.remove('is-pinned');
+    });
+  }
+
+  // ---------- Openers ----------
   const intro = () => {
     root.classList.add('is-drawn');
     gsap.to('.line__in', { y: 0, duration: 1.1, ease: 'power4.out', stagger: 0.09, delay: 0.05 });
@@ -123,23 +162,19 @@
     document.querySelectorAll('.sheet__bar > span').forEach((s, i) => gsap.delayedCall(0.2 + i * 0.1, () => scramble(s, 0.6)));
   };
 
-  // Desktop: the hero pins and scrolling drives the scan. Phones: it plays once the drawing is in view.
-  // Created first, before every trigger below it, so their positions include the pin spacing.
-  mm.add(desktop, () => {
-    buildReveal(gsap.timeline({
-      scrollTrigger: { trigger: '.hero', start: 'top top', end: '+=140%', pin: true, scrub: 0.6 },
-    }));
-    return () => notes.forEach((n) => n.classList.remove('is-on'));
-  });
-  mm.add('(max-width: 960px), (max-height: 599px)', () => {
-    buildReveal(gsap.timeline({
-      delay: 0.4,
-      scrollTrigger: { trigger: '.drawing', start: 'top 80%', once: true },
-    })).timeScale(0.55);
-  });
+  // Inner sheets: the cover's number and name slide in from the edges, then the rest settles.
+  const pageIntro = () => {
+    const from = {
+      left: { xPercent: -40 }, right: { xPercent: 40 }, up: { y: 90 }, fade: { y: 16 },
+    };
+    gsap.utils.toArray('[data-intro]').forEach((el, i) => {
+      gsap.fromTo(el, { opacity: 0, ...from[el.dataset.intro] }, {
+        opacity: 1, xPercent: 0, y: 0, duration: 1.1, ease: 'power4.out', delay: 0.05 + i * 0.08,
+      });
+    });
+  };
 
-  // ---------- Loader ----------
-  const loader = document.querySelector('.loader');
+  const loader = $('.loader');
   if (root.classList.contains('is-loading') && loader) {
     try { sessionStorage.setItem('wk-loaded', '1'); } catch (e) { /* private mode */ }
     loader.style.animation = 'none';
@@ -159,11 +194,11 @@
       .add(() => { root.classList.remove('is-loading'); intro(); }, '-=0.45');
   } else {
     root.classList.remove('is-loading');
-    intro();
+    if (drawing) intro(); else pageIntro();
   }
 
   // ---------- Statement: words fill in, then the page turns orange ----------
-  const statement = document.querySelector('[data-words]');
+  const statement = $('[data-words]');
   if (statement) {
     const text = statement.textContent.trim();
     statement.setAttribute('aria-label', text);
@@ -185,40 +220,88 @@
     });
   });
 
-  // RIVET: the number and name slide in from the edges, the screenshot drops in.
-  const rivetEntry = { trigger: '.chapter--rivet', start: 'top bottom', end: 'top top', scrub: true };
-  gsap.from('.chapter--rivet .cover__num', { xPercent: -40, ease: 'none', scrollTrigger: rivetEntry });
-  gsap.from('.chapter--rivet .cover__name', { xPercent: 40, ease: 'none', scrollTrigger: { ...rivetEntry } });
-  gsap.from('.chapter--rivet .cover__frame', { y: 120, rotate: -3, ease: 'none', scrollTrigger: { ...rivetEntry } });
+  // Homepage RIVET chapter: the number and name slide in from the edges as it scrolls up.
+  if ($('.chapter--rivet:not(.chapter--page)')) {
+    const rivetEntry = { trigger: '.chapter--rivet', start: 'top bottom', end: 'top top', scrub: true };
+    gsap.from('.chapter--rivet .cover__num', { xPercent: -40, ease: 'none', scrollTrigger: rivetEntry });
+    gsap.from('.chapter--rivet .cover__name', { xPercent: 40, ease: 'none', scrollTrigger: { ...rivetEntry } });
+    gsap.from('.chapter--rivet .cover__frame', { y: 120, rotate: -3, ease: 'none', scrollTrigger: { ...rivetEntry } });
+  }
 
   // Investigation: the HUD and title decode when the case file opens.
-  ScrollTrigger.create({
-    trigger: '.chapter--case', start: 'top 60%', once: true,
-    onEnter: () => {
-      document.querySelectorAll('.hud__tl, .hud__tr, .hud__bl, .hud__br')
-        .forEach((h, i) => gsap.delayedCall(i * 0.12, () => scramble(h, 0.7)));
-      scramble(document.querySelector('.case__title'), 1.1);
-    },
-  });
-  gsap.from('.hud__cross', {
-    rotate: 90, scale: 0, stagger: 0.08, duration: 0.6, ease: 'back.out(2)',
-    scrollTrigger: { trigger: '.chapter--case', start: 'top 40%' },
+  if ($('.chapter--case')) {
+    ScrollTrigger.create({
+      trigger: '.chapter--case', start: 'top 60%', once: true,
+      onEnter: () => {
+        document.querySelectorAll('.hud__tl, .hud__tr, .hud__bl, .hud__br')
+          .forEach((h, i) => gsap.delayedCall(i * 0.12, () => scramble(h, 0.7)));
+        scramble($('.case__title'), 1.1);
+      },
+    });
+    gsap.from('.hud__cross', {
+      rotate: 90, scale: 0, stagger: 0.08, duration: 0.6, ease: 'back.out(2)',
+      scrollTrigger: { trigger: '.chapter--case', start: 'top 40%' },
+    });
+  }
+
+  // Screenshots stamp down one after another.
+  const stamp = (items) => {
+    if (!items.length) return;
+    gsap.set(items, { opacity: 0 });
+    ScrollTrigger.batch(items, {
+      start: 'top 88%', once: true,
+      onEnter: (batch) => gsap.fromTo(batch,
+        { opacity: 0, scale: 1.3, rotate: () => gsap.utils.random(-6, 6) },
+        { opacity: 1, scale: 1, rotate: 0, duration: 0.45, ease: 'power4.out', stagger: 0.07 }),
+    });
+  };
+  stamp(gsap.utils.toArray('.evidence__item'));
+  stamp(gsap.utils.toArray('[data-stamp]'));
+
+  // About photo: on the homepage it settles as the chapter arrives; on the About sheet it drifts as you leave the cover.
+  const photo = $('.about__photo');
+  if (photo && photo.closest('.chapter--page')) {
+    gsap.fromTo(photo, { scale: 1.04, yPercent: 0 }, {
+      scale: 1.16, yPercent: 6, ease: 'none',
+      scrollTrigger: { trigger: '.cover--about', start: 'top top', end: 'bottom top', scrub: true },
+    });
+  } else if (photo) {
+    gsap.fromTo(photo, { scale: 1.18 }, {
+      scale: 1, ease: 'none',
+      scrollTrigger: { trigger: '.chapter--about', start: 'top bottom', end: 'top top', scrub: true },
+    });
+  }
+
+  // RIVET sheet: the big counter follows the milestone in view; each screenshot wipes in.
+  const msNow = $('[data-ms-now]');
+  if (msNow) {
+    gsap.utils.toArray('.ms__item').forEach((item) => {
+      ScrollTrigger.create({
+        trigger: item, start: 'top 55%', end: 'bottom 55%',
+        onToggle: (self) => {
+          if (!self.isActive || msNow.textContent === item.dataset.ms) return;
+          msNow.textContent = item.dataset.ms;
+          scramble(msNow, 0.35);
+        },
+      });
+      gsap.to(item.querySelector('.ms__shot'), {
+        clipPath: 'inset(0 0% 0 0)', duration: 1, ease: 'power3.inOut',
+        scrollTrigger: { trigger: item, start: 'top 80%', once: true },
+      });
+    });
+  }
+
+  // Figures drift a little inside their frames.
+  gsap.utils.toArray('[data-parallax]').forEach((img) => {
+    gsap.fromTo(img, { yPercent: -7, scale: 1.18 }, {
+      yPercent: 7, scale: 1.18, ease: 'none',
+      scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true },
+    });
   });
 
-  // Evidence screenshots stamp down one after another.
-  const evidence = gsap.utils.toArray('.evidence__item');
-  gsap.set(evidence, { opacity: 0 });
-  ScrollTrigger.batch(evidence, {
-    start: 'top 88%', once: true,
-    onEnter: (batch) => gsap.fromTo(batch,
-      { opacity: 0, scale: 1.3, rotate: () => gsap.utils.random(-6, 6) },
-      { opacity: 1, scale: 1, rotate: 0, duration: 0.45, ease: 'power4.out', stagger: 0.07 }),
-  });
-
-  // About: the photo settles as the cover arrives.
-  gsap.fromTo('.about__photo', { scale: 1.18 }, {
-    scale: 1, ease: 'none',
-    scrollTrigger: { trigger: '.chapter--about', start: 'top bottom', end: 'top top', scrub: true },
+  // Section titles decode once as they arrive.
+  gsap.utils.toArray('[data-scramble]').forEach((el) => {
+    ScrollTrigger.create({ trigger: el, start: 'top 85%', once: true, onEnter: () => scramble(el, 0.9) });
   });
 
   // Generic reveals and counters.
@@ -231,26 +314,37 @@
     ScrollTrigger.create({ trigger: el, start: 'top 90%', once: true, onEnter: () => countUp(el) });
   });
 
-  // Contact + footer.
-  gsap.from('.contact__title', {
-    yPercent: 30, opacity: 0, duration: 1, ease: 'power4.out',
-    scrollTrigger: { trigger: '.contact', start: 'top 70%' },
-  });
-  gsap.from('.contact__rows li', {
-    opacity: 0, x: -24, duration: 0.6, ease: 'power3.out', stagger: 0.05,
-    scrollTrigger: { trigger: '.contact__rows', start: 'top 85%' },
-  });
-  gsap.from('.footer__word', {
-    yPercent: 70, ease: 'none',
-    scrollTrigger: { trigger: '.footer', start: 'top bottom', end: 'bottom bottom', scrub: true },
-  });
+  // Contact, next sheet and footer.
+  if ($('.contact')) {
+    gsap.from('.contact__title', {
+      yPercent: 30, opacity: 0, duration: 1, ease: 'power4.out',
+      scrollTrigger: { trigger: '.contact', start: 'top 70%' },
+    });
+    gsap.from('.contact__rows li', {
+      opacity: 0, x: -24, duration: 0.6, ease: 'power3.out', stagger: 0.05,
+      scrollTrigger: { trigger: '.contact__rows', start: 'top 85%' },
+    });
+  }
+  const nextWord = $('[data-next-word]');
+  if (nextWord) {
+    gsap.fromTo(nextWord, { xPercent: 35 }, {
+      xPercent: 0, ease: 'none',
+      scrollTrigger: { trigger: '.next', start: 'top bottom', end: 'bottom bottom', scrub: true },
+    });
+  }
+  if ($('.footer__word')) {
+    gsap.from('.footer__word', {
+      yPercent: 70, ease: 'none',
+      scrollTrigger: { trigger: '.footer', start: 'top bottom', end: 'bottom bottom', scrub: true },
+    });
+  }
 
-  // Nav goes dark over the case file and the contact block.
-  const nav = document.querySelector('.nav');
-  const darkZone = (trigger, endTrigger, end) => ScrollTrigger.create({
-    trigger, endTrigger, start: 'top 56px', end,
-    onToggle: (self) => nav.classList.toggle('nav--dark', self.isActive),
-  });
-  darkZone('.chapter--case', '.chapter--case', 'bottom 56px');
-  darkZone('.contact', '.footer', 'bottom top');
+  // Nav goes dark over any section marked data-nav-dark.
+  const nav = $('.nav');
+  let zones = [];
+  const syncNav = () => nav.classList.toggle('nav--dark', zones.some((z) => z.isActive));
+  zones = gsap.utils.toArray('[data-nav-dark]').map((el) => ScrollTrigger.create({
+    trigger: el, start: 'top 56px', end: 'bottom 56px', onToggle: syncNav,
+  }));
+  ScrollTrigger.addEventListener('refresh', syncNav);
 })();
