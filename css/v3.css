@@ -532,9 +532,9 @@ ul, ol { padding: 0; list-style: none; }
 .dir__cap .mono { display: inline-grid; place-items: center; width: 24px; height: 24px; border: 1px solid var(--ink); }
 .dir__cap b { font-weight: 600; text-transform: uppercase; letter-spacing: -.02em; font-size: 18px; }
 .dir__cap span:last-child { color: var(--ink-2); font-size: 14px; }
-.hstrip.is-pinned .hstrip__pin { height: 100svh; justify-content: center; padding-top: var(--nav-h); }
+.hstrip.is-pinned .hstrip__pin { height: 100svh; justify-content: center; padding-top: var(--nav-h); overflow: hidden; }
 .hstrip.is-pinned .hstrip__track { overflow: visible; scroll-snap-type: none; }
-.hstrip.is-pinned .dir { flex-basis: min(46vw, calc((100svh - var(--nav-h) - 330px) * 1.6)); }
+.hstrip.is-pinned .dir { flex-basis: min(46vw, calc((100svh - var(--nav-h) - 400px) * 1.6)); }
 .hstrip.is-pinned .hstrip__progress { display: flex; }
 
 /* RIVET: milestones with a sticky counter */
@@ -569,6 +569,7 @@ ul, ol { padding: 0; list-style: none; }
   display: block; white-space: nowrap;
   font-size: clamp(56px, 12vw, 210px); font-weight: 600; line-height: .82; letter-spacing: -.065em; text-transform: uppercase;
 }
+@media (max-width: 600px) { .next__title { font-size: 11vw; } }
 .next:hover, .next:focus-visible { background: var(--accent); color: var(--ink); }
 .next:hover .next__label, .next:focus-visible .next__label { color: var(--ink); }
 
