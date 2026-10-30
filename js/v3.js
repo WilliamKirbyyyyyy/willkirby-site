@@ -99,18 +99,24 @@
   const notes = gsap.utils.toArray('[data-note]');
 
   // Once the scan has revealed the still, the Spark clip takes over from the same frame.
-  // It only loads then, and pauses while the hero is off screen.
+  // It only loads then, and pauses while the hero is off screen. The clip is fetched whole and
+  // played from a blob, because Safari needs byte-range responses and the host doesn't send them.
   const video = $('.drawing__video');
   let videoOn = false;
   const playVideo = () => {
     if (!video || videoOn) return;
     videoOn = true;
-    video.src = innerWidth < 700 ? video.dataset.srcSm : video.dataset.src;
-    video.addEventListener('playing', () => video.classList.add('is-playing'), { once: true });
-    video.play().catch(() => {});
-    new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) video.play().catch(() => {}); else video.pause();
-    }).observe(video);
+    fetch(innerWidth < 700 ? video.dataset.srcSm : video.dataset.src)
+      .then((r) => (r.ok ? r.blob() : Promise.reject()))
+      .then((blob) => {
+        video.src = URL.createObjectURL(blob);
+        video.addEventListener('playing', () => video.classList.add('is-playing'), { once: true });
+        video.play().catch(() => {});
+        new IntersectionObserver(([e]) => {
+          if (e.isIntersecting) video.play().catch(() => {}); else video.pause();
+        }).observe(video);
+      })
+      .catch(() => {}); // the still stays up
   };
 
   // Homepage hero: the scan reveals the screenshot top to bottom; each marker pops as the scan passes it.
