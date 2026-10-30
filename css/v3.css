@@ -203,6 +203,9 @@ ul, ol { padding: 0; list-style: none; }
   box-shadow: 0 0 0 1px var(--ink);
 }
 .drawing__shot img { width: 100%; height: 100%; object-fit: cover; }
+/* The clip starts on the same frame as the still, so it takes over without a jump. */
+.drawing__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.drawing__video.is-playing { opacity: 1; }
 .drawing__scan {
   position: absolute; left: -14px; right: -14px; top: var(--reveal, 100%);
   height: 2px; background: var(--accent);

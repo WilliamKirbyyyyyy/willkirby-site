@@ -93,10 +93,10 @@
             <div class="notes">
               <p class="notes__head mono">Notes</p>
               <ol class="notes__list">
-                <li data-note="1"><span class="notes__n mono">1</span>Ask RIVET — a local AI. Nothing leaves the PC.</li>
-                <li data-note="2"><span class="notes__n mono">2</span>Live CPU, memory, GPU and network readings.</li>
-                <li data-note="3"><span class="notes__n mono">3</span>Guard &amp; Restore undoes settings Windows Update changes.</li>
-                <li data-note="4"><span class="notes__n mono">4</span>Command bar. Type a request in plain English.</li>
+                <li data-note="1"><span class="notes__n mono">1</span>Live CPU, memory and disk readings.</li>
+                <li data-note="2"><span class="notes__n mono">2</span>Ask RIVET and Spark — a local AI. Nothing leaves the PC.</li>
+                <li data-note="3"><span class="notes__n mono">3</span>What’s using the most right now, with End task on every row.</li>
+                <li data-note="4"><span class="notes__n mono">4</span>Guard &amp; Restore undoes settings Windows Update changes.</li>
               </ol>
             </div>
           </div>
@@ -108,45 +108,63 @@
             <div class="drawing">
               <svg class="drawing__lines" viewBox="0 0 1280 720" aria-hidden="true" focusable="false">
                 <g class="ink">
-                  <rect pathLength="1" style="--i:0" x="1" y="1" width="1278" height="718"/>
-                  <path pathLength="1" style="--i:1" d="M0 32H1280M165 32V692M0 692H1280"/>
-                  <path pathLength="1" style="--i:2" d="M12 9h15v15H12zM36 10v12M46 16h70M1150 10h26v12h-26zM1196 16h10M1229 12h9v9h-9zM1259 11l9 9M1268 11l-9 9"/>
-                  <path pathLength="1" style="--i:3" d="M16 49h40M19 93h48M16 121h40M19 142h44M19 166h42M19 189h42M19 213h112M19 236h38M16 264h34M19 285h40M19 308h86M19 332h46"/>
-                  <rect pathLength="1" style="--i:3" x="5" y="59" width="160" height="22"/>
-                  <path pathLength="1" style="--i:4" d="M187 55h35M14 706h121"/>
-                  <rect pathLength="1" style="--i:4" x="187" y="66" width="81" height="21"/>
-                  <rect pathLength="1" style="--i:4" x="1182" y="697" width="86" height="18"/>
-                  <rect pathLength="1" style="--i:5" x="187" y="121" width="349" height="268"/>
-                  <rect pathLength="1" style="--i:6" x="544" y="121" width="349" height="268"/>
-                  <rect pathLength="1" style="--i:7" x="901" y="121" width="357" height="268"/>
-                  <rect pathLength="1" style="--i:6" x="187" y="399" width="349" height="277"/>
-                  <rect pathLength="1" style="--i:7" x="544" y="399" width="349" height="277"/>
-                  <rect pathLength="1" style="--i:8" x="901" y="399" width="357" height="277"/>
-                  <path pathLength="1" style="--i:8" d="M199 134h42M556 134h36M913 134h42M199 412h60M556 412h46M913 412h42M807 134h75"/>
-                  <path pathLength="1" style="--i:9" d="M199 150h40v20h-40zM556 150h38v20h-38zM913 148h40v20h-40zM199 427h28v20h-28zM556 427h94v20h-94zM913 427h94v20h-94z"/>
-                  <path pathLength="1" style="--i:9" d="M199 183H524M556 183H881M913 181H1246M199 459H524"/>
-                  <path pathLength="1" style="--i:10" d="M199 376C240 373 280 372 330 374S470 377 524 377M556 358H881M913 372H1246M199 661C230 663 260 665 300 665S470 665 524 665M556 646C620 652 680 656 720 658S770 664 800 664H881M913 662h66"/>
+                  <rect pathLength="1" style="--i:0" x="24" y="2" width="1226" height="52"/>
+                  <rect pathLength="1" style="--i:1" x="38" y="12" width="34" height="32"/>
+                  <path pathLength="1" style="--i:1" d="M86 16v24M86 16h14c8 0 8 12 0 12h-14M100 28l8 12M116 16v24M124 16l9 24 9-24M150 16v24h16M150 16h16M150 28h12"/>
+                  <rect pathLength="1" style="--i:2" x="184" y="16" width="54" height="24"/>
+                  <rect pathLength="1" style="--i:2" x="1063" y="16" width="81" height="24"/>
+                  <rect pathLength="1" style="--i:2" x="1156" y="16" width="80" height="24"/>
+                  <path pathLength="1" style="--i:2" d="M1166 28h10M1190 23h10v10h-10zM1216 23l9 10M1225 23l-9 10"/>
+                  <rect pathLength="1" style="--i:3" x="25" y="77" width="176" height="641"/>
+                  <rect pathLength="1" style="--i:3" x="39" y="92" width="148" height="29"/>
+                  <rect pathLength="1" style="--i:4" x="39" y="129" width="148" height="29"/>
+                  <rect pathLength="1" style="--i:4" x="39" y="166" width="148" height="30"/>
+                  <rect pathLength="1" style="--i:4" x="39" y="204" width="148" height="29"/>
+                  <rect pathLength="1" style="--i:4" x="39" y="241" width="148" height="30"/>
+                  <rect pathLength="1" style="--i:4" x="39" y="279" width="148" height="43"/>
+                  <rect pathLength="1" style="--i:4" x="39" y="330" width="148" height="29"/>
+                  <rect pathLength="1" style="--i:4" x="39" y="368" width="148" height="29"/>
+                  <rect pathLength="1" style="--i:4" x="39" y="405" width="148" height="30"/>
+                  <rect pathLength="1" style="--i:4" x="39" y="443" width="148" height="29"/>
+                  <rect pathLength="1" style="--i:5" x="223" y="76" width="323" height="174"/>
+                  <rect pathLength="1" style="--i:6" x="566" y="76" width="322" height="174"/>
+                  <rect pathLength="1" style="--i:7" x="908" y="76" width="342" height="174"/>
+                  <path pathLength="1" style="--i:8" d="M241 101h30M584 101h30M926 101h50M241 197h126M584 228h78M926 228h220"/>
+                  <rect pathLength="1" style="--i:8" x="584" y="190" width="284" height="22"/>
+                  <rect pathLength="1" style="--i:8" x="926" y="190" width="304" height="22"/>
+                  <rect pathLength="1" style="--i:6" x="223" y="273" width="670" height="339"/>
+                  <rect pathLength="1" style="--i:8" x="915" y="273" width="335" height="339"/>
+                  <path pathLength="1" style="--i:9" d="M241 298h212M933 298h72M933 326h165"/>
+                  <rect pathLength="1" style="--i:9" x="241" y="320" width="634" height="37"/>
+                  <rect pathLength="1" style="--i:9" x="241" y="366" width="634" height="37"/>
+                  <rect pathLength="1" style="--i:9" x="241" y="412" width="634" height="37"/>
+                  <rect pathLength="1" style="--i:10" x="241" y="458" width="634" height="37"/>
+                  <rect pathLength="1" style="--i:10" x="241" y="504" width="634" height="37"/>
+                  <rect pathLength="1" style="--i:10" x="241" y="550" width="634" height="37"/>
+                  <rect pathLength="1" style="--i:10" x="933" y="558" width="295" height="36"/>
                 </g>
                 <g class="hot">
-                  <path pathLength="1" style="--i:5" d="M187 106H347"/>
-                  <path pathLength="1" style="--i:10" d="M199 183H237M556 183H814M913 181H1003"/>
-                  <path pathLength="1" style="--i:3" d="M6 59V81"/>
+                  <path pathLength="1" style="--i:3" d="M40 107h146"/>
+                  <path pathLength="1" style="--i:5" d="M243 152c10-24 30-28 44-26M296 150h30"/>
+                  <path pathLength="1" style="--i:8" d="M586 201H780M928 201H1156"/>
+                  <path pathLength="1" style="--i:10" d="M781 330h80M781 376h80M781 422h80M781 468h80M781 514h80M781 560h80"/>
                 </g>
               </svg>
 
               <div class="drawing__shot">
-                <img src="/img/rivet-overview-1280.webp"
-                     srcset="/img/rivet-overview-640.webp 640w, /img/rivet-overview-1280.webp 1280w, /img/rivet-overview-1920.webp 1920w"
+                <img src="/img/rivet-pop-1280.webp"
+                     srcset="/img/rivet-pop-640.webp 640w, /img/rivet-pop-1280.webp 1280w, /img/rivet-pop-1920.webp 1920w"
                      sizes="(min-width: 960px) 62vw, 92vw"
                      width="1280" height="720" fetchpriority="high"
-                     alt="RIVET Overview screen with live CPU, memory, GPU and network readings">
+                     alt="RIVET's Overview in the Pop theme, with live CPU, memory and disk readings. In the clip, Spark opens and answers “Why is my PC slow right now?”">
+                <video class="drawing__video" muted playsinline loop preload="none" aria-hidden="true"
+                       data-src="/media/rivet-spark-1600.mp4" data-src-sm="/media/rivet-spark-960.mp4"></video>
               </div>
               <span class="drawing__scan" aria-hidden="true"></span>
-
-              <span class="marker" data-marker="1" style="--x:5.6%;--y:12.9%" aria-hidden="true">1</span>
-              <span class="marker" data-marker="2" style="--x:17%;--y:22%" aria-hidden="true">2</span>
-              <span class="marker" data-marker="3" style="--x:10%;--y:42.8%" aria-hidden="true">3</span>
-              <span class="marker" data-marker="4" style="--x:13%;--y:98%" aria-hidden="true">4</span>
+              <span class="marker" data-marker="1" style="--x:17.4%;--y:10.6%" aria-hidden="true">1</span>
+              <span class="marker" data-marker="2" style="--x:3%;--y:19.9%" aria-hidden="true">2</span>
+              <span class="marker" data-marker="3" style="--x:17.4%;--y:41.4%" aria-hidden="true">3</span>
+              <span class="marker" data-marker="4" style="--x:3%;--y:58.3%" aria-hidden="true">4</span>
             </div>
 
             <dl class="titleblock">

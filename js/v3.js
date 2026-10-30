@@ -98,6 +98,21 @@
   const markers = gsap.utils.toArray('.marker');
   const notes = gsap.utils.toArray('[data-note]');
 
+  // Once the scan has revealed the still, the Spark clip takes over from the same frame.
+  // It only loads then, and pauses while the hero is off screen.
+  const video = $('.drawing__video');
+  let videoOn = false;
+  const playVideo = () => {
+    if (!video || videoOn) return;
+    videoOn = true;
+    video.src = innerWidth < 700 ? video.dataset.srcSm : video.dataset.src;
+    video.addEventListener('playing', () => video.classList.add('is-playing'), { once: true });
+    video.play().catch(() => {});
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) video.play().catch(() => {}); else video.pause();
+    }).observe(video);
+  };
+
   // Homepage hero: the scan reveals the screenshot top to bottom; each marker pops as the scan passes it.
   const buildReveal = (tl) => {
     tl.set(scan, { opacity: 1 })
@@ -108,6 +123,7 @@
       tl.call(() => notes[i] && notes[i].classList.add('is-on'), null, at);
     });
     tl.to(scan, { opacity: 0, duration: 0.08 }, 1);
+    tl.call(playVideo, null, 1);
     return tl;
   };
 
