@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RIVET — case study · Will Kirby</title>
   <meta name="description" content="How RIVET went from a PowerShell script to a native Windows app on the Microsoft Store: design, milestones, and the problems solved along the way.">
-  <meta name="theme-color" content="#FF5C1A">
-  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#17181A">
+  <meta name="color-scheme" content="dark">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://willkirby.co.uk/rivet/">
   <meta property="og:title" content="RIVET — case study · Will Kirby">
@@ -26,7 +26,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
   <link rel="stylesheet" href="/css/v3.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
@@ -46,9 +46,9 @@
       <span class="sr-only">Menu</span>
     </button>
     <ul class="nav__links" id="nav-links">
-      <li><a href="/rivet/" aria-current="page"><span class="nav__num">01</span>RIVET</a></li>
-      <li><a href="/investigation/"><span class="nav__num">02</span>Investigation</a></li>
-      <li><a href="/about/"><span class="nav__num">03</span>About</a></li>
+      <li><a href="/rivet/" aria-current="page">RIVET</a></li>
+      <li><a href="/investigation/">Investigation</a></li>
+      <li><a href="/about/">About</a></li>
       <li><a class="nav__cta" href="/#contact">Contact</a></li>
     </ul>
   </header>
@@ -58,7 +58,6 @@
       <div class="cover">
         <div class="cover__inner">
           <div class="cover__top">
-            <span class="cover__num" data-intro="left">01</span>
             <h1 class="cover__name" id="page-title" data-intro="right">RIVET</h1>
           </div>
           <div class="cover__media">
@@ -74,7 +73,7 @@
           </div>
           <div class="cover__bottom">
             <p class="cover__line" data-intro="fade">From a PowerShell script to the Microsoft Store.</p>
-            <p class="cover__meta mono" data-intro="fade">Sheet 02 / 04 · Case study</p>
+            <p class="cover__meta mono" data-intro="fade">Case study</p>
           </div>
         </div>
         <span class="hazard" aria-hidden="true"></span>
@@ -82,7 +81,7 @@
 
       <div class="chapter__body grid-paper">
         <div class="cells">
-          <div class="cell cell--label"><p class="mono">[02.1] Brief</p></div>
+          <div class="cell cell--label"><p class="mono">Brief</p></div>
           <div class="cell cell--span3">
             <p class="body-lg" data-reveal>A native Windows system manager that started life as a PowerShell script. This is how it was designed and built, and the problems that only showed up once real people could install it.</p>
           </div>
@@ -101,8 +100,8 @@
         <!-- 02.2 The story: a drawing revision table -->
         <section class="block" aria-labelledby="growth-title">
           <div class="block__head">
-            <p class="mono block__label">[02.2] The story</p>
-            <h2 class="block__title" id="growth-title" data-scramble>A script that kept growing up.</h2>
+            <p class="mono block__label" data-type>The story</p>
+            <h2 class="block__title" id="growth-title" data-lines>A script that kept growing up.</h2>
           </div>
           <ol class="revs">
             <li class="revs__head mono" aria-hidden="true"><span>Rev</span><span>Change</span><span>Description</span></li>
@@ -119,8 +118,8 @@
         <section class="hstrip" aria-labelledby="design-title" data-hstrip>
           <div class="hstrip__pin">
             <div class="hstrip__head">
-              <p class="mono block__label">[02.3] Design</p>
-              <h2 class="block__title" id="design-title" data-scramble>Four directions before one line of UI.</h2>
+              <p class="mono block__label" data-type>Design</p>
+              <h2 class="block__title" id="design-title" data-lines>Four directions before one line of UI.</h2>
               <p class="hstrip__intro">Before writing any interface code I mocked the same screen in four very different visual styles, to decide what RIVET should feel like rather than defaulting to the first idea.</p>
               <p class="hstrip__progress mono" aria-hidden="true"><span class="hstrip__bar"><span data-hstrip-bar></span></span>Scroll</p>
             </div>
@@ -148,8 +147,8 @@
         <!-- 02.4 Build: a sticky counter tracks the milestone in view -->
         <section class="block" aria-labelledby="build-title">
           <div class="block__head">
-            <p class="mono block__label">[02.4] Build</p>
-            <h2 class="block__title" id="build-title" data-scramble>Ten milestones, each one runnable.</h2>
+            <p class="mono block__label" data-type>Build</p>
+            <h2 class="block__title" id="build-title" data-lines>Ten milestones, each one runnable.</h2>
             <p class="block__intro">RIVET 3 was built in ten milestones, written to a spec, with the core logic covered by automated tests. Each milestone had to run before the next one started.</p>
           </div>
           <div class="ms">
@@ -194,8 +193,8 @@
         <!-- 02.5 Problems solved -->
         <section class="block block--flush" aria-labelledby="problems-title">
           <div class="block__head">
-            <p class="mono block__label">[02.5] Problems solved</p>
-            <h2 class="block__title" id="problems-title" data-scramble>The bugs that only real installs find.</h2>
+            <p class="mono block__label" data-type>Problems solved</p>
+            <h2 class="block__title" id="problems-title" data-lines>The bugs that only real installs find.</h2>
           </div>
           <ul class="cells cells--points">
             <li class="cell point" data-reveal>
@@ -222,8 +221,8 @@
         <!-- 02.6 Today -->
         <section class="block block--flush" aria-labelledby="shots-title">
           <div class="block__head">
-            <p class="mono block__label">[02.6] RIVET 3.5</p>
-            <h2 class="block__title" id="shots-title" data-scramble>What it looks like today.</h2>
+            <p class="mono block__label" data-type>RIVET 3.5</p>
+            <h2 class="block__title" id="shots-title" data-lines>What it looks like today.</h2>
           </div>
           <ul class="cells cells--three">
             <li class="cell shot" data-stamp>
@@ -264,13 +263,13 @@
       </div>
     </section>
 
-    <a class="next" href="/investigation/" data-nav-dark>
-      <span class="next__label mono">Next sheet — 03 / 04</span>
+    <a class="next" href="/investigation/">
+      <span class="next__label mono">Up next</span>
       <span class="next__title" data-next-word>Investigation <span aria-hidden="true">→</span></span>
     </a>
   </main>
 
-  <footer class="footer" data-nav-dark>
+  <footer class="footer">
     <p class="footer__word" aria-hidden="true">Will Kirby</p>
     <div class="footer__row mono">
       <p>© 2026 Will Kirby · Kirby Systems</p>

@@ -1,20 +1,9 @@
-// willkirby.co.uk v3 motion, shared by the homepage and the three inner sheets.
+// willkirby.co.uk motion, shared by the homepage and the three inner pages.
 // Everything here is progressive: without it (or under reduced motion) the
 // page is already complete, because hidden start states only apply under html.anim.
 (() => {
   const root = document.documentElement;
   const $ = (s) => document.querySelector(s);
-
-  // UK clock for the sheet bar and the case-file HUD.
-  const clocks = document.querySelectorAll('[data-clock]');
-  if (clocks.length) {
-    const fmt = new Intl.DateTimeFormat('en-GB', {
-      timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false,
-    });
-    const tick = () => { const t = fmt.format(new Date()); clocks.forEach((c) => { c.textContent = t; }); };
-    tick();
-    setInterval(tick, 1000);
-  }
 
   // Phone menu.
   const toggle = $('.nav__toggle');
@@ -95,8 +84,6 @@
   // ---------- Pins first, so every trigger after them includes their spacing ----------
   const drawing = $('.drawing');
   const scan = $('.drawing__scan');
-  const markers = gsap.utils.toArray('.marker');
-  const notes = gsap.utils.toArray('[data-note]');
 
   // Once the scan has revealed the still, the Spark clip takes over from the same frame.
   // It only loads then, and pauses while the hero is off screen. The clip is fetched whole and
@@ -119,34 +106,84 @@
       .catch(() => {}); // the still stays up
   };
 
-  // Homepage hero: the scan reveals the screenshot top to bottom; each marker pops as the scan passes it.
+  // Homepage hero: the scan reveals the screenshot top to bottom, then the clip takes over.
   const buildReveal = (tl) => {
     tl.set(scan, { opacity: 1 })
       .fromTo(drawing, { '--reveal': '0%' }, { '--reveal': '100%', duration: 1, ease: 'none' }, 0);
-    markers.forEach((m, i) => {
-      const at = Math.min(parseFloat(m.style.getPropertyValue('--y')) / 100, 0.95);
-      tl.to(m, { scale: 1, duration: 0.08, ease: 'back.out(3)' }, at);
-      tl.call(() => notes[i] && notes[i].classList.add('is-on'), null, at);
-    });
     tl.to(scan, { opacity: 0, duration: 0.08 }, 1);
     tl.call(playVideo, null, 1);
     return tl;
   };
 
   if (drawing) {
-    gsap.set(markers, { xPercent: -50, yPercent: -50, scale: 0 });
     // Desktop: the hero pins and scrolling drives the scan. Phones: it plays once the drawing is in view.
     mm.add(desktop, () => {
       buildReveal(gsap.timeline({
         scrollTrigger: { trigger: '.hero', start: 'top top', end: '+=140%', pin: true, scrub: 0.6 },
       }));
-      return () => notes.forEach((n) => n.classList.remove('is-on'));
     });
     mm.add('(max-width: 960px), (max-height: 599px)', () => {
       buildReveal(gsap.timeline({
         delay: 0.4,
         scrollTrigger: { trigger: '.drawing', start: 'top 80%', once: true },
       })).timeScale(0.55);
+    });
+  }
+
+  // Homepage RIVET story: it pins, and each stretch of scrolling brings in the next
+  // point and swaps the screenshot to match. Very short screens step through without the pin.
+  const story = $('[data-story]');
+  if (story) {
+    const steps = story.querySelectorAll('[data-story-step]');
+    const shots = story.querySelectorAll('.story__frame img');
+    const now = story.querySelector('[data-story-now]');
+    let current = 0;
+    const show = (i) => {
+      if (i === current) return;
+      current = i;
+      steps.forEach((s, j) => s.classList.toggle('is-on', j === i));
+      shots.forEach((s, j) => s.classList.toggle('is-on', j === i));
+      now.textContent = String(i + 1).padStart(2, '0');
+      scramble(now, 0.3);
+    };
+    mm.add('(min-height: 560px)', () => {
+      story.classList.add('is-pinned');
+      ScrollTrigger.create({
+        trigger: story, start: 'top top', end: `+=${steps.length * 70}%`, pin: true,
+        onUpdate: (self) => show(Math.min(steps.length - 1, Math.floor(self.progress * steps.length))),
+      });
+      return () => story.classList.remove('is-pinned');
+    });
+    mm.add('(max-height: 559px)', () => {
+      steps.forEach((s, i) => ScrollTrigger.create({
+        trigger: s, start: 'top 70%', end: 'bottom 70%', onToggle: (self) => { if (self.isActive) show(i); },
+      }));
+    });
+  }
+
+  // Homepage investigation: the tally pins, the count runs up to 12, the zero lands, then each finding steps in.
+  const tally = $('[data-tally]');
+  if (tally) {
+    const num = tally.querySelector('[data-tally-to]');
+    const to = Number(num.dataset.tallyTo);
+    const buildTally = (tl) => {
+      const state = { v: 0 };
+      tl.fromTo(state, { v: 0 }, {
+        v: to, duration: 1, ease: 'none', onUpdate: () => { num.textContent = Math.round(state.v); },
+      })
+        .from(tally.querySelector('.tally__num--zero'), { opacity: 0, y: 60, duration: 0.4 }, '-=0.1');
+      tally.querySelectorAll('[data-tally-step]').forEach((row) => tl.to(row, { opacity: 1, duration: 0.4 }));
+      return tl.to({}, { duration: 0.3 }); // a beat before it lets go
+    };
+    mm.add('(min-height: 560px)', () => {
+      tally.classList.add('is-pinned');
+      buildTally(gsap.timeline({
+        scrollTrigger: { trigger: tally, start: 'top top', end: '+=180%', pin: true, scrub: 0.5 },
+      }));
+      return () => tally.classList.remove('is-pinned');
+    });
+    mm.add('(max-height: 559px)', () => {
+      buildTally(gsap.timeline({ scrollTrigger: { trigger: tally, start: 'top 70%', once: true } })).timeScale(0.5);
     });
   }
 
@@ -181,7 +218,6 @@
       el.textContent = '0';
       gsap.delayedCall(1, () => countUp(el));
     });
-    document.querySelectorAll('.sheet__bar > span').forEach((s, i) => gsap.delayedCall(0.2 + i * 0.1, () => scramble(s, 0.6)));
   };
 
   // Inner sheets: the cover's number and name slide in from the edges, then the rest settles.
@@ -219,19 +255,71 @@
     if (drawing) intro(); else pageIntro();
   }
 
-  // ---------- Statement: words fill in, then the page turns orange ----------
+  // ---------- Statement: words fill in as you scroll ----------
   const statement = $('[data-words]');
   if (statement) {
     const text = statement.textContent.trim();
     statement.setAttribute('aria-label', text);
     statement.innerHTML = text.split(/\s+/).map((w) => `<span class="word" aria-hidden="true">${w}</span>`).join(' ');
-    gsap.timeline({
+    gsap.to('.statement .word', {
+      color: '#ECEAE4', stagger: 0.1, duration: 0.3, ease: 'none',
       scrollTrigger: { trigger: '.statement', start: 'top top', end: 'bottom bottom', scrub: 0.4 },
-    })
-      .to('.statement .word', { color: '#121212', stagger: 0.1, duration: 0.3, ease: 'none' })
-      .to('.statement', { backgroundColor: '#FF5C1A', duration: 0.5, ease: 'none' }, '+=0.3')
-      .to('.statement__eyebrow', { color: '#121212', duration: 0.8, ease: 'none' }, '<');
+    });
   }
+
+  // ---------- Typed labels: each mono label types itself in once it arrives ----------
+  gsap.utils.toArray('[data-type]').forEach((el) => {
+    const text = el.textContent.trim();
+    const read = document.createElement('span');
+    read.className = 'sr-only';
+    read.textContent = text;
+    const out = document.createElement('span');
+    out.setAttribute('aria-hidden', 'true');
+    el.replaceChildren(read, out);
+    ScrollTrigger.create({
+      trigger: el, start: 'top 92%', once: true,
+      onEnter: () => {
+        el.style.visibility = 'visible';
+        out.classList.add('is-typing');
+        const state = { n: 0 };
+        gsap.to(state, {
+          n: text.length, duration: Math.min(1.1, 0.2 + text.length * 0.035), ease: 'none',
+          onUpdate: () => { out.textContent = text.slice(0, Math.round(state.n)); },
+          onComplete: () => gsap.delayedCall(0.8, () => out.classList.remove('is-typing')),
+        });
+      },
+    });
+  });
+
+  // ---------- Headings rise word by word out of their own masks ----------
+  const maskWords = (node) => {
+    [...node.childNodes].forEach((n) => {
+      if (n.nodeType === 1) { maskWords(n); return; }
+      if (n.nodeType !== 3 || !n.nodeValue.trim()) return;
+      const frag = document.createDocumentFragment();
+      n.nodeValue.split(/(\s+)/).forEach((part) => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.append(part); return; }
+        const mask = document.createElement('span');
+        mask.className = 'wmask';
+        const inner = document.createElement('span');
+        inner.className = 'wmask__in';
+        inner.textContent = part;
+        mask.append(inner);
+        frag.append(mask);
+      });
+      n.replaceWith(frag);
+    });
+  };
+  gsap.utils.toArray('[data-lines]').forEach((el) => {
+    maskWords(el);
+    const words = el.querySelectorAll('.wmask__in');
+    gsap.set(words, { yPercent: 110 });
+    ScrollTrigger.create({
+      trigger: el, start: 'top 88%', once: true,
+      onEnter: () => gsap.to(words, { yPercent: 0, duration: 0.9, ease: 'power4.out', stagger: 0.045 }),
+    });
+  });
 
   // ---------- Chapters ----------
   // Each cover sinks back as its body slides over it.
@@ -242,28 +330,11 @@
     });
   });
 
-  // Homepage RIVET chapter: the number and name slide in from the edges as it scrolls up.
+  // Homepage RIVET chapter: the name slides in and the badge spins up as it scrolls into place.
   if ($('.chapter--rivet:not(.chapter--page)')) {
     const rivetEntry = { trigger: '.chapter--rivet', start: 'top bottom', end: 'top top', scrub: true };
-    gsap.from('.chapter--rivet .cover__num', { xPercent: -40, ease: 'none', scrollTrigger: rivetEntry });
-    gsap.from('.chapter--rivet .cover__name', { xPercent: 40, ease: 'none', scrollTrigger: { ...rivetEntry } });
-    gsap.from('.chapter--rivet .cover__frame', { y: 120, rotate: -3, ease: 'none', scrollTrigger: { ...rivetEntry } });
-  }
-
-  // Investigation: the HUD and title decode when the case file opens.
-  if ($('.chapter--case')) {
-    ScrollTrigger.create({
-      trigger: '.chapter--case', start: 'top 60%', once: true,
-      onEnter: () => {
-        document.querySelectorAll('.hud__tl, .hud__tr, .hud__bl, .hud__br')
-          .forEach((h, i) => gsap.delayedCall(i * 0.12, () => scramble(h, 0.7)));
-        scramble($('.case__title'), 1.1);
-      },
-    });
-    gsap.from('.hud__cross', {
-      rotate: 90, scale: 0, stagger: 0.08, duration: 0.6, ease: 'back.out(2)',
-      scrollTrigger: { trigger: '.chapter--case', start: 'top 40%' },
-    });
+    gsap.from('.chapter--rivet .cover__name', { xPercent: 40, ease: 'none', scrollTrigger: rivetEntry });
+    gsap.from('.chapter--rivet .cover__badge', { y: 160, rotate: -40, scale: 0.6, ease: 'none', scrollTrigger: { ...rivetEntry } });
   }
 
   // Screenshots stamp down one after another.
@@ -340,11 +411,6 @@
     });
   });
 
-  // Section titles decode once as they arrive.
-  gsap.utils.toArray('[data-scramble]').forEach((el) => {
-    ScrollTrigger.create({ trigger: el, start: 'top 85%', once: true, onEnter: () => scramble(el, 0.9) });
-  });
-
   // Generic reveals and counters.
   ScrollTrigger.batch('[data-reveal]', {
     start: 'top 90%', once: true,
@@ -355,12 +421,8 @@
     ScrollTrigger.create({ trigger: el, start: 'top 90%', once: true, onEnter: () => countUp(el) });
   });
 
-  // Contact, next sheet and footer.
+  // Contact, up next and footer.
   if ($('.contact')) {
-    gsap.from('.contact__title', {
-      yPercent: 30, opacity: 0, duration: 1, ease: 'power4.out',
-      scrollTrigger: { trigger: '.contact', start: 'top 70%' },
-    });
     gsap.from('.contact__rows li', {
       opacity: 0, x: -24, duration: 0.6, ease: 'power3.out', stagger: 0.05,
       scrollTrigger: { trigger: '.contact__rows', start: 'top 85%' },
@@ -368,8 +430,9 @@
   }
   const nextWord = $('[data-next-word]');
   if (nextWord) {
-    gsap.fromTo(nextWord, { xPercent: 35 }, {
-      xPercent: 0, ease: 'none',
+    // The next page's title grows into place as you reach the end of this one.
+    gsap.fromTo(nextWord, { xPercent: 35, scale: 0.55, transformOrigin: '0% 100%' }, {
+      xPercent: 0, scale: 1, ease: 'none',
       scrollTrigger: { trigger: '.next', start: 'top bottom', end: 'bottom bottom', scrub: true },
     });
   }
@@ -379,13 +442,4 @@
       scrollTrigger: { trigger: '.footer', start: 'top bottom', end: 'bottom bottom', scrub: true },
     });
   }
-
-  // Nav goes dark over any section marked data-nav-dark.
-  const nav = $('.nav');
-  let zones = [];
-  const syncNav = () => nav.classList.toggle('nav--dark', zones.some((z) => z.isActive));
-  zones = gsap.utils.toArray('[data-nav-dark]').map((el) => ScrollTrigger.create({
-    trigger: el, start: 'top 56px', end: 'bottom 56px', onToggle: syncNav,
-  }));
-  ScrollTrigger.addEventListener('refresh', syncNav);
 })();
