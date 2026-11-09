@@ -1,4 +1,4 @@
-/* willkirby.co.uk v4 — matte charcoal, stacked chapters, scroll-driven stories.
+/* willkirby.co.uk v4 - matte charcoal, stacked chapters, scroll-driven stories.
    Default styles are the finished page. Hidden start states live under
    html.anim, which is only set when motion is allowed and JS is running. */
 
@@ -210,6 +210,8 @@ ul, ol { padding: 0; list-style: none; }
 .statement { position: relative; padding: var(--section) var(--gutter); }
 .statement__pin { max-width: 1200px; margin: 0 auto; }
 .statement__eyebrow { margin-bottom: 22px; color: var(--ink-2); }
+.statement__link { margin-top: 28px; }
+.statement__link a { color: var(--accent); text-underline-offset: 3px; }
 .statement__text {
   font-size: clamp(32px, 5.2vw, 84px);
   font-weight: 600; line-height: .98; letter-spacing: -.045em;
@@ -434,6 +436,8 @@ ul, ol { padding: 0; list-style: none; }
   text-transform: uppercase; white-space: nowrap; margin-left: -.04em;
 }
 .footer__row { display: flex; justify-content: space-between; gap: 16px; margin-top: 20px; color: var(--ink-2); }
+.footer__row a { text-underline-offset: 3px; }
+.footer__row a:hover { color: var(--accent); }
 
 /* typed labels: a caret rides the end of the line while it types */
 .anim [data-type] { visibility: hidden; }
@@ -616,6 +620,8 @@ body.page--case { background: var(--case); }
 .roles a:hover { color: var(--accent); }
 .awards--five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 .awards--five li { gap: 14px; }
+.awards--six { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.awards--six li { gap: 14px; }
 .currently { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); gap: 24px; margin-top: 28px; }
 .currently__label { color: var(--ink-2); padding-top: 8px; }
 .currently__list { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -674,6 +680,7 @@ html.anim .build__parts li:last-child { min-height: 70vh; }
   .cell--raise { grid-column: 1 / -1; }
   .awards--five { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .awards--five li:last-child { grid-column: 1 / -1; }
+  .awards--six { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   /* Phones: one column, the stage sticks under the nav and the parts scroll beneath it. */
   .build { display: block; }
   .build__stage { top: calc(var(--nav-h) + 8px); z-index: 2; margin-bottom: 28px; }
